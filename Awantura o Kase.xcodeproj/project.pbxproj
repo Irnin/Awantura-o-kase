@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		825DC90F2EBBBD9E0045271C /* PoweredTouchBar in Frameworks */ = {isa = PBXBuildFile; productRef = 825DC90E2EBBBD9E0045271C /* PoweredTouchBar */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		8201EC272EAB623200AC6E4B /* Awantura o Kase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Awantura o Kase.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				825DC90F2EBBBD9E0045271C /* PoweredTouchBar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = "Awantura o Kase";
 			packageProductDependencies = (
+				825DC90E2EBBBD9E0045271C /* PoweredTouchBar */,
 			);
 			productName = "Awantura o Kase";
 			productReference = 8201EC272EAB623200AC6E4B /* Awantura o Kase.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 8201EC1E2EAB623200AC6E4B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				825DC90D2EBBBD9E0045271C /* XCLocalSwiftPackageReference "../../../IT/Demos/Swift/PoweredTouchBar" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8201EC282EAB623200AC6E4B /* Products */;
 			projectDirPath = "";
@@ -325,6 +334,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		825DC90D2EBBBD9E0045271C /* XCLocalSwiftPackageReference "../../../IT/Demos/Swift/PoweredTouchBar" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../IT/Demos/Swift/PoweredTouchBar;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		825DC90E2EBBBD9E0045271C /* PoweredTouchBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PoweredTouchBar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8201EC1F2EAB623200AC6E4B /* Project object */;
 }
