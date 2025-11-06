@@ -2,13 +2,8 @@ import SwiftUI
 import PoweredTouchBar
 
 struct AuctionAdminView: View {
-    @Environment(GameController.self) private var gameController
-    
-    @State private var tempBlue = 0
-    @State private var tempGreen = 0
-    @State private var tempYellow = 0
-    
-    @FocusState private var focusedField: TeamColor?
+    @Bindable private var viewModel = ViewModel()
+    @FocusState private var selectedTeam: TeamColor?
     
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
@@ -47,30 +42,108 @@ struct AuctionAdminView: View {
                     .frame(maxWidth: .infinity, minHeight: 44)
             
                 
-                TextField("Enter your score", value: $tempBlue, format: .number)
+                TextField("Enter your score", value: $viewModel.temporaryInput[.blue], format: .number)
                     .textFieldStyle(.plain)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, minHeight: 44)
                     .background(Color.blue)
                     .foregroundColor(.white)
-                    .focused($focusedField, equals: .blue)
+                    .focused($selectedTeam, equals: .blue)
+                    .onKeyPress { keyPress in
+                                if keyPress.key == .space {
+                                    viewModel.something(team: .blue, amount: viewModel.temporaryInput[.blue]!)
+                                    return .handled
+                                }
+                                return .ignored
+                            }
                 
-                TextField("Enter your score", value: $tempGreen, format: .number)
+                TextField("Enter your score", value: $viewModel.temporaryInput[.green], format: .number)
                     .textFieldStyle(.plain)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, minHeight: 44)
                     .background(Color.green)
                     .foregroundColor(.white)
-                    .focused($focusedField, equals: .green)
+                    .focused($selectedTeam, equals: .green)
+                    .onKeyPress { keyPress in
+                                if keyPress.key == .space {
+                                    viewModel.something(team: .green, amount: viewModel.temporaryInput[.green]!)
+                                    return .handled
+                                }
+                                return .ignored
+                            }
                 
-                TextField("Enter your score", value: $tempYellow, format: .number)
+                TextField("Enter your score", value: $viewModel.temporaryInput[.yellow], format: .number)
                     .textFieldStyle(.plain)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, minHeight: 44)
                     .background(Color.yellow)
-                    .focused($focusedField, equals: .yellow)
+                    .focused($selectedTeam, equals: .yellow)
+                    .onKeyPress { keyPress in
+                                if keyPress.key == .space {
+                                    viewModel.something(team: .yellow, amount: viewModel.temporaryInput[.yellow]!)
+                                    return .handled
+                                }
+                                return .ignored
+                            }
                 
-                Text("")
+                Text("0")
+                    .frame(maxWidth: .infinity, minHeight: 44)
+            }
+            
+            GridRow {
+                Text("Auction")
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                
+                Text("\(viewModel.bidAmount[.blue]!)")
+                    .textFieldStyle(.plain)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                
+                Text("\(viewModel.bidAmount[.green]!)")
+                    .textFieldStyle(.plain)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                
+                Text("\(viewModel.bidAmount[.yellow]!)")
+                    .textFieldStyle(.plain)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(Color.yellow)
+                
+                Text("Pula Admina:")
+                    .frame(maxWidth: .infinity, minHeight: 44)
+            }
+            
+            GridRow {
+                Text("Stan Konta")
+                    .frame(maxWidth: .infinity, minHeight: 44)
+            
+                
+                Text("\(viewModel.getBalance(ofTeam: .blue))")
+                    .textFieldStyle(.plain)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                
+                Text("\(viewModel.getBalance(ofTeam: .green))")
+                    .textFieldStyle(.plain)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                
+                Text("\(viewModel.getBalance(ofTeam: .yellow))")
+                    .textFieldStyle(.plain)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(Color.yellow)
+                
+                Text("0")
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
         }
@@ -80,8 +153,8 @@ struct AuctionAdminView: View {
                 title: "Niebiescy",
                 color: .blue,
                 action: {
-                    print("Przycisk został naciśnięty!")
-                    focusedField = .blue
+                    viewModel.selectTeam(.blue)
+                    selectedTeam = .blue
                 }
             )
             
@@ -90,8 +163,8 @@ struct AuctionAdminView: View {
                 title: "Zieloni",
                 color: .green,
                 action: {
-                    print("Przycisk został naciśnięty!")
-                    focusedField = .green
+                    viewModel.selectTeam(.green)
+                    selectedTeam = .green
                 }
             )
             
@@ -100,11 +173,10 @@ struct AuctionAdminView: View {
                 title: "Żółci",
                 color: .yellow,
                 action: {
-                    print("Przycisk został naciśnięty!")
-                    focusedField = .yellow
+                    viewModel.selectTeam(.yellow)
+                    selectedTeam = .yellow
                 }
             )
         }
-
     }
 }

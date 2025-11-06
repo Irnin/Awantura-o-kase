@@ -10,7 +10,13 @@ struct GameModel {
         teams.append(Team(color: .yellow))
     }
     
-    public func getTeam(withColor color: TeamColor) -> Team? {
-        return teams.first(where: { $0.id == color })
+    public func getTeam(withColor color: TeamColor) -> Team {
+        let team = teams.first(where: { $0.id == color })
+        return team!
+    }
+    
+    mutating func addBalance(forTeam team: TeamColor, balance: Int) {
+        let team = getTeam(withColor: team)
+        team.balance += balance
     }
 }
