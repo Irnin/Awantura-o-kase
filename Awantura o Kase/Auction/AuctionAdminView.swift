@@ -8,10 +8,11 @@ struct AuctionAdminView: View {
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
             GridRow {
-                Text("Winner")
+                Text("\(viewModel.getWinnerTeamName()) \(viewModel.getCurrentBind())")
+                    .font(.system(size: 20, weight: .bold))
                     .gridCellColumns(5)
                     .frame(maxWidth: .infinity, minHeight: 44)
-                    .background(Color.pink)
+                    .background(viewModel.getWinnerTeamColor())
             }
             
             GridRow {

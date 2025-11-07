@@ -31,4 +31,8 @@ class GameController {
     public func getPoolOfMoney() -> Int {
         return game.poolOfMoney
     }
+    
+    public func getTeam(ofColor color: TeamColor) -> Team {
+        return game.getTeam(withColor: color)
+    }
 }
