@@ -21,7 +21,14 @@ class GameController {
     
     public func getBalance(ofTeam team: TeamColor) -> Int {
         let team = game.getTeam(withColor: team)
-        
         return team.balance
+    }
+    
+    public func increasePool(amount: Int) {
+        game.poolOfMoney += amount
+    }
+    
+    public func getPoolOfMoney() -> Int {
+        return game.poolOfMoney
     }
 }

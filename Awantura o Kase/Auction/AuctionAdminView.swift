@@ -51,7 +51,7 @@ struct AuctionAdminView: View {
                     .focused($selectedTeam, equals: .blue)
                     .onKeyPress { keyPress in
                                 if keyPress.key == .space {
-                                    viewModel.something(team: .blue, amount: viewModel.temporaryInput[.blue]!)
+                                    viewModel.outbid(team: .blue, amount: viewModel.temporaryInput[.blue]!)
                                     return .handled
                                 }
                                 return .ignored
@@ -66,7 +66,7 @@ struct AuctionAdminView: View {
                     .focused($selectedTeam, equals: .green)
                     .onKeyPress { keyPress in
                                 if keyPress.key == .space {
-                                    viewModel.something(team: .green, amount: viewModel.temporaryInput[.green]!)
+                                    viewModel.outbid(team: .green, amount: viewModel.temporaryInput[.green]!)
                                     return .handled
                                 }
                                 return .ignored
@@ -80,13 +80,13 @@ struct AuctionAdminView: View {
                     .focused($selectedTeam, equals: .yellow)
                     .onKeyPress { keyPress in
                                 if keyPress.key == .space {
-                                    viewModel.something(team: .yellow, amount: viewModel.temporaryInput[.yellow]!)
+                                    viewModel.outbid(team: .yellow, amount: viewModel.temporaryInput[.yellow]!)
                                     return .handled
                                 }
                                 return .ignored
                             }
                 
-                Text("0")
+                Text("\(viewModel.getPoolOfMoney())")
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
             
@@ -143,7 +143,7 @@ struct AuctionAdminView: View {
                     .frame(maxWidth: .infinity, minHeight: 44)
                     .background(Color.yellow)
                 
-                Text("0")
+                Text("N/A")
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
         }

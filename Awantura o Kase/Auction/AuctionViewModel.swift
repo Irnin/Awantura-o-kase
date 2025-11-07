@@ -14,15 +14,22 @@ extension AuctionAdminView {
             selectedTeam = color
         }
         
-        func something(team: TeamColor, amount: Int) {
+        func outbid(team: TeamColor, amount: Int) {
             let actualAmount = amount * 100
+            
             bidAmount[team]! += actualAmount
+            
             gameController.deduct(fromTeam: team, amount: actualAmount)
+            gameController.increasePool(amount: actualAmount)
             resetTemporaryInput()
         }
         
         public func getBalance(ofTeam team: TeamColor) -> Int {
             gameController.getBalance(ofTeam: team)
+        }
+        
+        public func getPoolOfMoney() -> Int {
+            return gameController.getPoolOfMoney()
         }
         
         private func resetTemporaryInput() {

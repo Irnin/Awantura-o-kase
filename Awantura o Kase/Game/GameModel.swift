@@ -1,5 +1,6 @@
 struct GameModel {
     var teams: [Team] = []
+    var poolOfMoney: Int = 0
     
     init() {
         
