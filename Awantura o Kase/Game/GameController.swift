@@ -6,8 +6,17 @@ class GameController {
     
     private var game: GameModel
     
-    private init() {
-        game = GameModel()
+    // MARK: - Game State
+    public func startGame() {
+        game.gameState = .auction
+    }
+    
+    public func getCurrentGameState() -> GameState {
+        return game.gameState
+    }
+    
+    public func setCurrentGameState(_ gameState: GameState) {
+        game.gameState = gameState
     }
     
     public func addBalance(team: TeamColor, amount: Int) {
@@ -34,5 +43,9 @@ class GameController {
     
     public func getTeam(ofColor color: TeamColor) -> Team {
         return game.getTeam(withColor: color)
+    }
+    
+    private init() {
+        game = GameModel()
     }
 }

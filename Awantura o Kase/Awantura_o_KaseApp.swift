@@ -2,10 +2,25 @@ import SwiftUI
 
 @main
 struct Awantura_o_KaseApp: App {
+    private var gameController = GameController.shared
     
     var body: some Scene {
         WindowGroup {
-            AuctionAdminView()
+            ContentView()
+        }
+        .commands {
+            CommandMenu("DEBUG") {
+                Menu("Game State") {
+                    Button("PreGame") {
+                        gameController.setCurrentGameState(.preGame)
+                    }
+                    
+                    Button("Auction") {
+                        gameController.setCurrentGameState(.auction)
+                    }
+                }
+            }
+            
         }
     }
 }

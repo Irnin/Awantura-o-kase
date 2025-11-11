@@ -1,4 +1,5 @@
 struct GameModel {
+    var gameState: GameState = .preGame
     var teams: [Team] = []
     var poolOfMoney: Int = 0
     
