@@ -5,9 +5,15 @@ struct Awantura_o_KaseApp: App {
     private var gameController = GameController.shared
     
     var body: some Scene {
-        WindowGroup {
+        
+        WindowGroup("Host View") {
+            AuctionHostView()
+        }
+        
+        WindowGroup("TV") {
             ContentView()
         }
+        
         .commands {
             CommandMenu("DEBUG") {
                 Menu("Game State") {

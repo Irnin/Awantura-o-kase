@@ -5,13 +5,15 @@ struct ContentView: View {
     private var gameController = GameController.shared
     
     var body: some View {
-        Group {
+        ZStack {
             switch gameController.getCurrentGameState() {
             case .preGame:
-                PreGameView()
+                //PreGameView()
+                AuctionTvView()
             case .auction:
-                AuctionAdminView()
+                AuctionTvView()
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

@@ -41,6 +41,10 @@ class GameController {
         return game.poolOfMoney
     }
     
+    public func getTeams() -> [Team] {
+        return game.teams
+    }
+    
     public func getTeam(ofColor color: TeamColor) -> Team {
         return game.getTeam(withColor: color)
     }

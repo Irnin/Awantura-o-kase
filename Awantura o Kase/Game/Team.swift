@@ -12,14 +12,14 @@ class Team: Identifiable {
         
         switch color {
             case .blue:
-                self.color = Color.blue
+            self.color = Color(r: 12, g: 36, b: 94)
                 name = "Niebiescy"
             case .green:
-                self.color = Color.green
+            self.color = Color(r: 32, g: 76, b: 18)
                 name = "Zieloni"
             case .yellow:
-                self.color = Color.yellow
-                name = "Żółti"
+            self.color = Color(r: 193, g: 157, b: 52)
+                name = "Żółci"
         }
     }
     
