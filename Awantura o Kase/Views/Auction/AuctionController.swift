@@ -22,6 +22,8 @@ class AuctionController {
         return gameController.getTeams()
     }
     
+    /// Method is used to point
+    /// - Parameter color: which team is selected
     func selectTeam(_ color: TeamColor) {
         resetTemporaryInput()
         selectedTeam = color
@@ -31,6 +33,10 @@ class AuctionController {
         let actualAmount = amount * 100
         
         if actualAmount <= currentBid{
+            return
+        }
+        
+        if gameController.getBalance(ofTeam: team) - actualAmount < 0 {
             return
         }
         

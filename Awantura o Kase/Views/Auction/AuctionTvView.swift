@@ -29,7 +29,7 @@ struct AuctionTvView: View {
             GridRow {
                 ForEach(teams) { team in
                     Text("\(auctionController.getBid(ofTeam: team.id))")
-                        .font(.system(size: auctionController.tvFontSize, weight: .bold))
+                        .font(Font.custom("LED counter 7", size: auctionController.tvFontSize))
                         .minimumScaleFactor(0.1)
                         .lineLimit(1)
                         .bold()
@@ -81,7 +81,7 @@ struct AuctionTvView: View {
             GridRow {
                 ForEach(teams) { team in
                     Text("\(auctionController.getBalance(ofTeam: team.id))")
-                        .font(.system(size: auctionController.tvFontSize, weight: .bold))
+                        .font(Font.custom("LED counter 7", size: auctionController.tvFontSize))
                         .minimumScaleFactor(0.1)
                         .lineLimit(1)
                         .bold()
@@ -90,7 +90,7 @@ struct AuctionTvView: View {
                 }
                 
                 Text("\(auctionController.getPoolOfMoney())")
-                    .font(.system(size: auctionController.tvFontSize, weight: .bold))
+                    .font(Font.custom("LED counter 7", size: auctionController.tvFontSize))
                     .minimumScaleFactor(0.1)
                     .lineLimit(1)
                     .bold()
