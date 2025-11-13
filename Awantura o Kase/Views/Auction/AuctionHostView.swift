@@ -1,5 +1,6 @@
 import SwiftUI
 import PoweredTouchBar
+import AppKit
 
 struct AuctionHostView: View {
     @Bindable private var viewModel = AuctionController.shared
