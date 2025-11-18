@@ -1,0 +1,33 @@
+{
+  "originHash" : "8f1fbe835be1cf73143fbb91d993ebd9f619e47f17b3a09dfb4f3fafad9f1d4f",
+  "pins" : [
+    {
+      "identity" : "deft-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/didactek/deft-log.git",
+      "state" : {
+        "revision" : "77d13e7b4c7fb912fd3112a014fbef5e5f3c47d4",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "obs-websocket-client",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/didactek/obs-websocket-client",
+      "state" : {
+        "revision" : "71fc493b90f084925bd3799bdb67df3ef5f9e128",
+        "version" : "2.1.2"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "ce592ae52f982c847a4efc0dd881cc9eb32d29f2",
+        "version" : "1.6.4"
+      }
+    }
+  ],
+  "version" : 3
+}

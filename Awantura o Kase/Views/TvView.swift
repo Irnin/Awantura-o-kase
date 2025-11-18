@@ -1,8 +1,6 @@
 import SwiftUI
-import AppKit
-import CoreText
 
-struct ContentView: View {
+struct TvView: View {
     
     private var gameController = GameController.shared
     
@@ -10,8 +8,7 @@ struct ContentView: View {
         ZStack {
             switch gameController.getCurrentGameState() {
             case .preGame:
-                //PreGameView()
-                AuctionTvView()
+                PreGameView()
             case .auction:
                 AuctionTvView()
             }

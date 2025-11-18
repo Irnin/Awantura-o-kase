@@ -1,8 +1,11 @@
 import SwiftUI
+import Foundation
+import OBSAsyncAPI
 
 @Observable
 class AuctionController {
     static let shared = AuctionController()
+    
     private let gameController = GameController.shared
     private(set) var selectedTeam: TeamColor?
     
@@ -16,10 +19,6 @@ class AuctionController {
     
     private init() {
         
-    }
-    
-    func getTeams() -> [Team] {
-        return gameController.getTeams()
     }
     
     /// Method is used to point
@@ -60,6 +59,14 @@ class AuctionController {
     
     public func getPoolOfMoney() -> Int {
         gameController.getPoolOfMoney()
+    }
+    
+    func getTeams() -> [Team] {
+        return gameController.getTeams()
+    }
+    
+    func getTeam(ofColor color: TeamColor) -> Team {
+        return gameController.getTeam(ofColor: color)
     }
     
     // MARK: - Get winner details

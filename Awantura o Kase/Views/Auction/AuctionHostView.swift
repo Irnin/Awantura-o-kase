@@ -3,120 +3,126 @@ import PoweredTouchBar
 import AppKit
 
 struct AuctionHostView: View {
-    @Bindable private var viewModel = AuctionController.shared
+    @Bindable private var controller = AuctionController.shared
     @FocusState private var selectedTeam: TeamColor?
     
     var body: some View {
-        Grid(horizontalSpacing: 0, verticalSpacing: 0) {
-            GridRow {
-                Text("\(viewModel.getWinnerTeamName()) \(viewModel.getCurrentBind())")
-                    .font(.system(size: 20, weight: .bold))
-                    .gridCellColumns(5)
-                    .frame(maxWidth: .infinity, minHeight: 44)
-                    .background(viewModel.getWinnerTeamColor())
-            }
-            
-            GridRow {
-                Text("Team")
-                    .frame(maxWidth: .infinity)
-                
-                ForEach(viewModel.getTeams()) { team in
-                    Text(team.name)
-                        .bold()
+        VStack {
+            Grid(horizontalSpacing: 0, verticalSpacing: 0) {
+                GridRow {
+                    Text("\(controller.getWinnerTeamName()) \(controller.getCurrentBind())")
+                        .font(.system(size: 20, weight: .bold))
+                        .gridCellColumns(5)
                         .frame(maxWidth: .infinity, minHeight: 44)
-                        .background(team.color)
+                        .background(controller.getWinnerTeamColor())
                 }
                 
-                Text("Pula")
-                    .frame(maxWidth: .infinity, minHeight: 44)
-            }
-            
-            GridRow {
-                Text("Auction input")
-                    .frame(maxWidth: .infinity, minHeight: 44)
-                
-                ForEach(viewModel.getTeams()) { team in
-                    TextField("", value: $viewModel.temporaryInput[team.id], format: .number)
-                        .textFieldStyle(.plain)
-                        .multilineTextAlignment(.center)
+                GridRow {
+                    Text("Team")
+                        .frame(maxWidth: .infinity)
+                    
+                    ForEach(controller.getTeams()) { team in
+                        Text(team.name)
+                            .bold()
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .background(team.color)
+                    }
+                    
+                    Text("Pula")
                         .frame(maxWidth: .infinity, minHeight: 44)
-                        .background(team.color)
-                        .foregroundColor(.white)
-                        .focused($selectedTeam, equals: team.id)
-                        .onKeyPress { keyPress in
-                            if keyPress.key == .space {
-                                viewModel.outbid(team: team.id, amount: viewModel.temporaryInput[team.id]!)
-                                return .handled
+                }
+                
+                GridRow {
+                    Text("Auction input")
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                    
+                    ForEach(controller.getTeams()) { team in
+                        TextField("", value: $controller.temporaryInput[team.id], format: .number)
+                            .textFieldStyle(.plain)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .background(team.color)
+                            .foregroundColor(.white)
+                            .focused($selectedTeam, equals: team.id)
+                            .onKeyPress { keyPress in
+                                if keyPress.key == .space {
+                                    controller.outbid(team: team.id, amount: controller.temporaryInput[team.id]!)
+                                    return .handled
+                                }
+                                return .ignored
                             }
-                            return .ignored
-                        }
-                }
-                
-                Text("\(viewModel.getPoolOfMoney())")
-                    .frame(maxWidth: .infinity, minHeight: 44)
-            }
-            
-            GridRow {
-                Text("Auction")
-                    .frame(maxWidth: .infinity, minHeight: 44)
-                
-                ForEach(viewModel.getTeams()) { team in
-                    Text("\(viewModel.bidAmount[team.id]!)")
-                        .textFieldStyle(.plain)
-                        .multilineTextAlignment(.center)
+                    }
+                    
+                    Text("\(controller.getPoolOfMoney())")
                         .frame(maxWidth: .infinity, minHeight: 44)
-                        .background(team.color)
-                        .foregroundColor(.white)
                 }
                 
-                Text("Pula Admina:")
-                    .frame(maxWidth: .infinity, minHeight: 44)
-            }
-            
-            GridRow {
-                Text("Stan Konta")
-                    .frame(maxWidth: .infinity, minHeight: 44)
-            
-                ForEach(viewModel.getTeams()) { team in
-                    Text("\(viewModel.getBalance(ofTeam: team.id))")
-                        .textFieldStyle(.plain)
-                        .multilineTextAlignment(.center)
+                GridRow {
+                    Text("Auction")
                         .frame(maxWidth: .infinity, minHeight: 44)
-                        .background(team.color)
-                        .foregroundColor(.white)
+                    
+                    ForEach(controller.getTeams()) { team in
+                        Text("\(controller.bidAmount[team.id]!)")
+                            .textFieldStyle(.plain)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .background(team.color)
+                            .foregroundColor(.white)
+                    }
+                    
+                    Text("Pula Admina:")
+                        .frame(maxWidth: .infinity, minHeight: 44)
                 }
                 
-                Text("N/A")
-                    .frame(maxWidth: .infinity, minHeight: 44)
+                GridRow {
+                    Text("Stan Konta")
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                
+                    ForEach(controller.getTeams()) { team in
+                        Text("\(controller.getBalance(ofTeam: team.id))")
+                            .textFieldStyle(.plain)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .background(team.color)
+                            .foregroundColor(.white)
+                    }
+                    
+                    Text("N/A")
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                }
             }
         }
         .poweredTouchBar {
+            let blueTeam = controller.getTeam(ofColor: .blue)
+            let greenTeam = controller.getTeam(ofColor: .green)
+            let yellowTeam = controller.getTeam(ofColor: .yellow)
+            
             PoweredColorButton(
                 identifier: "blueTouchBarButton",
-                title: "Niebiescy",
-                color: .blue,
+                title: blueTeam.name,
+                color: NSColor(blueTeam.color),
                 action: {
-                    viewModel.selectTeam(.blue)
+                    controller.selectTeam(.blue)
                     selectedTeam = .blue
                 }
             )
             
             PoweredColorButton(
                 identifier: "greenTouchBarButton",
-                title: "Zieloni",
-                color: .green,
+                title: greenTeam.name,
+                color: NSColor(greenTeam.color),
                 action: {
-                    viewModel.selectTeam(.green)
+                    controller.selectTeam(.green)
                     selectedTeam = .green
                 }
             )
             
             PoweredColorButton(
                 identifier: "yellowTouchBarButton",
-                title: "Żółci",
-                color: .yellow,
+                title: yellowTeam.name,
+                color: NSColor(yellowTeam.color),
                 action: {
-                    viewModel.selectTeam(.yellow)
+                    controller.selectTeam(.yellow)
                     selectedTeam = .yellow
                 }
             )

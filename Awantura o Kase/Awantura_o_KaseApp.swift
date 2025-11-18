@@ -3,15 +3,16 @@ import SwiftUI
 @main
 struct Awantura_o_KaseApp: App {
     private var gameController = GameController.shared
+    private var obsController = OBSController.shared
     
     var body: some Scene {
         
         WindowGroup("Host View") {
-            AuctionHostView()
+            HostView()
         }
         
         WindowGroup("TV") {
-            ContentView()
+            TvView()
         }
         
         .commands {
@@ -26,7 +27,20 @@ struct Awantura_o_KaseApp: App {
                     }
                 }
             }
-            
+            CommandMenu("VAR") {
+                Button("Start replay buffer") {
+                    Task {await obsController.startReplyBuffer()}
+                }
+                
+                Button("Stop replay buffer") {
+                    Task {await obsController.stopReplyBuffer()}
+                }
+                
+                Button("Save replay buffer") {
+                    Task {await obsController.saveReplyBuffer()}
+                }
+                
+            }
         }
     }
 }

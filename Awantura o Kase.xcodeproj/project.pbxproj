@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		820BC5372ECCFD9400D3B290 /* OBSAsyncAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 820BC5362ECCFD9400D3B290 /* OBSAsyncAPI */; };
+		820BC5392ECCFD9400D3B290 /* OBSWebsocket in Frameworks */ = {isa = PBXBuildFile; productRef = 820BC5382ECCFD9400D3B290 /* OBSWebsocket */; };
 		825DC90F2EBBBD9E0045271C /* PoweredTouchBar in Frameworks */ = {isa = PBXBuildFile; productRef = 825DC90E2EBBBD9E0045271C /* PoweredTouchBar */; };
 /* End PBXBuildFile section */
 
@@ -27,7 +29,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				820BC5392ECCFD9400D3B290 /* OBSWebsocket in Frameworks */,
 				825DC90F2EBBBD9E0045271C /* PoweredTouchBar in Frameworks */,
+				820BC5372ECCFD9400D3B290 /* OBSAsyncAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +75,8 @@
 			name = "Awantura o Kase";
 			packageProductDependencies = (
 				825DC90E2EBBBD9E0045271C /* PoweredTouchBar */,
+				820BC5362ECCFD9400D3B290 /* OBSAsyncAPI */,
+				820BC5382ECCFD9400D3B290 /* OBSWebsocket */,
 			);
 			productName = "Awantura o Kase";
 			productReference = 8201EC272EAB623200AC6E4B /* Awantura o Kase.app */;
@@ -102,6 +108,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				825DC90D2EBBBD9E0045271C /* XCLocalSwiftPackageReference "../../../IT/Demos/Swift/PoweredTouchBar" */,
+				820BC5352ECCFD9400D3B290 /* XCRemoteSwiftPackageReference "obs-websocket-client" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8201EC282EAB623200AC6E4B /* Products */;
@@ -261,7 +268,17 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Awantura-o-Kase-Info.plist";
@@ -292,7 +309,17 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Awantura-o-Kase-Info.plist";
@@ -344,7 +371,28 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		820BC5352ECCFD9400D3B290 /* XCRemoteSwiftPackageReference "obs-websocket-client" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/didactek/obs-websocket-client";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		820BC5362ECCFD9400D3B290 /* OBSAsyncAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 820BC5352ECCFD9400D3B290 /* XCRemoteSwiftPackageReference "obs-websocket-client" */;
+			productName = OBSAsyncAPI;
+		};
+		820BC5382ECCFD9400D3B290 /* OBSWebsocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 820BC5352ECCFD9400D3B290 /* XCRemoteSwiftPackageReference "obs-websocket-client" */;
+			productName = OBSWebsocket;
+		};
 		825DC90E2EBBBD9E0045271C /* PoweredTouchBar */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PoweredTouchBar;
