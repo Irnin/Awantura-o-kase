@@ -2,7 +2,7 @@ import SwiftUI
 import PoweredTouchBar
 
 struct AuctionTvView: View {
-    private var auctionController = AuctionController.shared
+    @Bindable private var auctionController = AuctionController.shared
     
     var body: some View {
         let teams = auctionController.getTeams()

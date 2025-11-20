@@ -3,7 +3,6 @@ import SwiftUI
 @main
 struct Awantura_o_KaseApp: App {
     private var gameController = GameController.shared
-    private var obsController = OBSController.shared
     
     var body: some Scene {
         

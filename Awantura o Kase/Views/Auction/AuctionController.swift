@@ -1,6 +1,7 @@
 import SwiftUI
 import Foundation
 import OBSAsyncAPI
+import os
 
 @Observable
 class AuctionController {
@@ -35,17 +36,19 @@ class AuctionController {
             return
         }
         
-        if gameController.getBalance(ofTeam: team) - actualAmount < 0 {
+        // Can not place a bid when you're not rich enought :)
+        if gameController.getBalance(ofTeam: team) + getBid(ofTeam: team) < actualAmount {
             return
         }
         
         currentBid = actualAmount
+        let amountDifference = actualAmount - bidAmount[team]!
         
-        bidAmount[team]! += currentBid
+        bidAmount[team]! = currentBid
         winningTeam = team
         
-        gameController.deduct(fromTeam: team, amount: currentBid)
-        gameController.increasePool(amount: currentBid)
+        gameController.deduct(fromTeam: team, amount: amountDifference)
+        gameController.increasePool(amount: amountDifference)
         resetTemporaryInput()
     }
     
@@ -53,6 +56,7 @@ class AuctionController {
         return bidAmount[team]!
     }
     
+    /// Method returns balance of team
     public func getBalance(ofTeam team: TeamColor) -> Int {
         gameController.getBalance(ofTeam: team)
     }
