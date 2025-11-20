@@ -9,6 +9,8 @@ class OBSController {
     let client: OBSClient = OBSClient(port: 4455)
     let logger = Logger()
     
+    private var gameController = GameController.shared
+    
     private var cancellables = Set<AnyCancellable>()
     
     func connect() async {
@@ -33,7 +35,15 @@ class OBSController {
                     case .replayBufferSaved(let info):
                         let savedPath = info.savedReplayPath
                         self.logger.info("Saved replay buffer to \(savedPath)")
-                    
+                        self.gameController.saveVarVideoLocation(at: savedPath)
+                        break
+                        
+                    case .replayBufferStateChanged(let info):
+                        self.gameController.setStateOfVarRecording(info.outputActive)
+                        let message = info.outputActive ? "active" : "inactive"
+                        self.logger.info("Replay buffer state is \(message)")
+                        break
+                        
                     default: break
                     }
                 }

@@ -5,6 +5,7 @@ import AppKit
 struct AuctionHostView: View {
     @Bindable private var controller = AuctionController.shared
     @FocusState private var selectedTeam: TeamColor?
+    @State var showInspector = true
     
     var body: some View {
         VStack {

@@ -3,6 +3,10 @@ struct GameModel {
     var teams: [Team] = []
     var poolOfMoney: Int = 0
     
+    // VAR
+    var currentVARrecord: String = ""
+    var isVARreocording: Bool = false
+    
     init() {
         
         // Preaparing teams
@@ -20,5 +24,24 @@ struct GameModel {
     mutating func addBalance(forTeam team: TeamColor, balance: Int) {
         let team = getTeam(withColor: team)
         team.balance += balance
+    }
+}
+
+
+extension GameModel {
+    public mutating func saveVARrecordPath(_ path: String) {
+        self.currentVARrecord = path
+    }
+    
+    public func getVARrecordPath() -> String {
+        return self.currentVARrecord
+    }
+    
+    public mutating func setStateOfVarRecording(_ isRecording: Bool) {
+        self.isVARreocording = isRecording
+    }
+    
+    public func getStateOfVarRecording() -> Bool {
+        return self.isVARreocording
     }
 }

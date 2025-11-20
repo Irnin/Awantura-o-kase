@@ -3,8 +3,8 @@ import Foundation
 @Observable
 class GameController {
     static let shared = GameController()
-    
     private var game: GameModel
+
     
     // MARK: - Game State
     public func startGame() {
@@ -51,5 +51,23 @@ class GameController {
     
     private init() {
         game = GameModel()
+    }
+}
+
+extension GameController {
+    public func saveVarVideoLocation(at path: String) {
+        game.saveVARrecordPath(path)
+    }
+    
+    public func getVarVideoLocation() -> String {
+        return game.getVARrecordPath()
+    }
+    
+    public func setStateOfVarRecording(_ isRecording: Bool) {
+        game.setStateOfVarRecording(isRecording)
+    }
+    
+    public func getStateOfVarRecording() -> Bool {
+        return game.getStateOfVarRecording()
     }
 }

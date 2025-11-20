@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct HostView: View {
+    @State var showInspector = true
+    
     var body: some View {
         TabView {
             PreGameView()
@@ -12,6 +14,19 @@ struct HostView: View {
                 .tabItem {
                     Label("Auction", systemImage: "hammer.fill")
                 }
+        }
+        .tabViewStyle(.sidebarAdaptable)
+        .inspector(isPresented: $showInspector) {
+            Inspector()
+        }
+        .toolbar {
+            ToolbarItem(placement: .automatic) {
+                Button {
+                    showInspector.toggle()
+                } label: {
+                    Label("Inspector", systemImage: "sidebar.trailing")
+                }
+            }
         }
     }
 }

@@ -27,20 +27,6 @@ struct Awantura_o_KaseApp: App {
                     }
                 }
             }
-            CommandMenu("VAR") {
-                Button("Start replay buffer") {
-                    Task {await obsController.startReplyBuffer()}
-                }
-                
-                Button("Stop replay buffer") {
-                    Task {await obsController.stopReplyBuffer()}
-                }
-                
-                Button("Save replay buffer") {
-                    Task {await obsController.saveReplyBuffer()}
-                }
-                
-            }
         }
     }
 }
