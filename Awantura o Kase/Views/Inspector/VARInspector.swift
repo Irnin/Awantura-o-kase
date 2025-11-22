@@ -41,7 +41,8 @@ struct VARInspector: View {
         }
         
         if(gameController.getVarVideoLocation() != "") {
-            Text(String("Record: " + gameController.getVarVideoLocation()))
+            let fileName = gameController.getVarVideoLocation().split(separator: "/").last!
+            Text(String("Record: " + fileName))
         }
         
         Divider()

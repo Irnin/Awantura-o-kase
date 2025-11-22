@@ -11,11 +11,6 @@ class AuctionController {
     
     private(set) var winningTeam: TeamColor?
     private(set) var currentBid: Int = 0
-    private(set) var counter: Int = 0
-    
-    public func countUp() {
-        counter += 1
-    }
     
     var temporaryInput: [TeamColor: Int] = [.blue: 0, .green: 0, .yellow: 0]
     var bidAmount: [TeamColor: Int] = [.blue: 0, .green: 0, .yellow: 0]

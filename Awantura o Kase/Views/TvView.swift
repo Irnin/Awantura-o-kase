@@ -12,6 +12,8 @@ struct TvView: View {
                 AuctionTvView()
             case .ads:
                 AdPlayerTvView()
+            case .varReplay:
+                VARTvView()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

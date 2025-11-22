@@ -13,8 +13,6 @@ struct AuctionHostView: View {
                 .font(.title)
                 .foregroundColor(.accentColor)
             
-            Text(String(controller.counter))
-            
             Grid(horizontalSpacing: 0, verticalSpacing: 0) {
                 GridRow {
                     Text("\(controller.getWinnerTeamName()) \(controller.getCurrentBind())")

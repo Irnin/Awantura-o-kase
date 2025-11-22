@@ -57,6 +57,9 @@ class GameController {
 // MARK: - Controlling VAR
 extension GameController {
     public func saveVarVideoLocation(at path: String) {
+        let varController = VARController.shared
+        varController.setPlayer(url: URL(fileURLWithPath: path))
+        
         game.saveVARrecordPath(path)
     }
     

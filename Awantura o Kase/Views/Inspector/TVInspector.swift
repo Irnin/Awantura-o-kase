@@ -28,6 +28,12 @@ struct TVInspector: View {
                 .foregroundColor(gameController.getTvScene() == .ads ? .accentColor : .primary)
         }
         
+        Button(action: {gameController.setTvScene(.varReplay)}) {
+            Text("VAR")
+                .frame(maxWidth: .infinity)
+                .foregroundColor(gameController.getTvScene() == .varReplay ? .accentColor : .primary)
+        }
+        
         Divider()
     }
 }

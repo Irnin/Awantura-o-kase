@@ -14,6 +14,11 @@ struct HostView: View {
                 .tabItem {
                     Label("Auction", systemImage: "hammer.fill")
                 }
+            
+            VARHostView()
+                .tabItem {
+                    Label("VAR", systemImage: "camera.fill")
+                }
         }
         .tabViewStyle(.sidebarAdaptable)
         .inspector(isPresented: $showInspector) {
