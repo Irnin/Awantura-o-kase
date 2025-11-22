@@ -2,7 +2,8 @@ import SwiftUI
 
 @main
 struct Awantura_o_KaseApp: App {
-    private var gameController = GameController.shared
+    private let gameController = GameController.shared
+    private let auctionController = AuctionController.shared
     
     var body: some Scene {
         

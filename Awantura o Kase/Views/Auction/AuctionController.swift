@@ -7,16 +7,26 @@ import os
 class AuctionController {
     static let shared = AuctionController()
     
-    private let gameController = GameController.shared
     private(set) var selectedTeam: TeamColor?
     
     private(set) var winningTeam: TeamColor?
     private(set) var currentBid: Int = 0
+    private(set) var counter: Int = 0
+    
+    public func countUp() {
+        counter += 1
+    }
     
     var temporaryInput: [TeamColor: Int] = [.blue: 0, .green: 0, .yellow: 0]
     var bidAmount: [TeamColor: Int] = [.blue: 0, .green: 0, .yellow: 0]
     
+    var timer = Timer()
+    var logger = Logger()
+    
+    // TODO: Move to settings
     var tvFontSize = CGFloat(70)
+    
+    private let gameController = GameController.shared
     
     private init() {
         

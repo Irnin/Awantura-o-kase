@@ -9,6 +9,12 @@ struct AuctionHostView: View {
     
     var body: some View {
         VStack {
+            Text("Auction")
+                .font(.title)
+                .foregroundColor(.accentColor)
+            
+            Text(String(controller.counter))
+            
             Grid(horizontalSpacing: 0, verticalSpacing: 0) {
                 GridRow {
                     Text("\(controller.getWinnerTeamName()) \(controller.getCurrentBind())")

@@ -1,5 +1,6 @@
 struct GameModel {
     var gameState: GameState = .preGame
+    var tvScene: TVscene = .preGame
     var teams: [Team] = []
     var poolOfMoney: Int = 0
     
@@ -27,7 +28,7 @@ struct GameModel {
     }
 }
 
-
+// MARK: - Controlling VAR
 extension GameModel {
     public mutating func saveVARrecordPath(_ path: String) {
         self.currentVARrecord = path
@@ -43,5 +44,16 @@ extension GameModel {
     
     public func getStateOfVarRecording() -> Bool {
         return self.isVARreocording
+    }
+}
+
+// MARK: - Controlling TV view
+extension GameModel {
+    public mutating func setTvScene(_ view: TVscene){
+        self.tvScene = view
+    }
+    
+    public func getTvScene() -> TVscene {
+        return self.tvScene
     }
 }

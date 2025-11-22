@@ -1,16 +1,17 @@
 import SwiftUI
 
 struct TvView: View {
-    
-    private var gameController = GameController.shared
+    private let gameController = GameController.shared
     
     var body: some View {
         ZStack {
-            switch gameController.getCurrentGameState() {
+            switch gameController.getTvScene() {
             case .preGame:
                 PreGameView()
             case .auction:
                 AuctionTvView()
+            case .ads:
+                AdPlayerTvView()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

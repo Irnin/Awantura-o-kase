@@ -54,6 +54,7 @@ class GameController {
     }
 }
 
+// MARK: - Controlling VAR
 extension GameController {
     public func saveVarVideoLocation(at path: String) {
         game.saveVARrecordPath(path)
@@ -69,5 +70,16 @@ extension GameController {
     
     public func getStateOfVarRecording() -> Bool {
         return game.getStateOfVarRecording()
+    }
+}
+
+// MARK: - Controlling TV
+extension GameController {
+    public func setTvScene(_ scene: TVscene) {
+        game.setTvScene(scene)
+    }
+    
+    public func getTvScene() -> TVscene {
+        return game.getTvScene()
     }
 }

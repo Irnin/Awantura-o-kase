@@ -7,6 +7,7 @@ struct Inspector: View {
         VStack(alignment: .leading, spacing: 5) {
             BasicInformationsInspector()
             VARInspector()
+            TVInspector()
             Spacer()
         }
         .padding(.horizontal, 10)
