@@ -10,6 +10,11 @@ struct HostView: View {
                     Label("Waiting", systemImage: "clock.fill")
                 }
             
+            ReelHostView()
+                .tabItem {
+                    Label("Spinner", systemImage: "inset.filled.topthird.middlethird.bottomthird.rectangle")
+                }
+            
             AuctionHostView()
                 .tabItem {
                     Label("Auction", systemImage: "hammer.fill")

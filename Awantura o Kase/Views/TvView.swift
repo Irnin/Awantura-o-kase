@@ -8,6 +8,8 @@ struct TvView: View {
             switch gameController.getTvScene() {
             case .preGame:
                 PreGameView()
+            case .drawCategory:
+                ReelTvView()
             case .auction:
                 AuctionTvView()
             case .ads:

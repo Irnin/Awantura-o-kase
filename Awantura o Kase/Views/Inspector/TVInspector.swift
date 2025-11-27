@@ -10,28 +10,12 @@ struct TVInspector: View {
                 .foregroundColor(.accentColor)
         }
         
-        Button(action: {gameController.setTvScene(.preGame)}) {
-            Text("PreGame")
-                .frame(maxWidth: .infinity)
-                .foregroundColor(gameController.getTvScene() == .preGame ? .accentColor : .primary)
-        }
-        
-        Button(action: {gameController.setTvScene(.auction)}) {
-            Text("Auction")
-                .frame(maxWidth: .infinity)
-                .foregroundColor(gameController.getTvScene() == .auction ? .accentColor : .primary)
-        }
-        
-        Button(action: {gameController.setTvScene(.ads)}) {
-            Text("Ads")
-                .frame(maxWidth: .infinity)
-                .foregroundColor(gameController.getTvScene() == .ads ? .accentColor : .primary)
-        }
-        
-        Button(action: {gameController.setTvScene(.varReplay)}) {
-            Text("VAR")
-                .frame(maxWidth: .infinity)
-                .foregroundColor(gameController.getTvScene() == .varReplay ? .accentColor : .primary)
+        ForEach(TVscene.allCases, id: \.self) { tvScene in
+            Button(action: { gameController.setTvScene(tvScene) }) {
+                Text(tvScene.displayName)
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(gameController.getTvScene() == tvScene ? .accentColor : .primary)
+            }
         }
         
         Divider()
