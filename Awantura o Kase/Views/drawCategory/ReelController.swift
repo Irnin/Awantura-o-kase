@@ -16,9 +16,8 @@ class ReelController {
     var animationDuration: Double? = nil
     
     private init() {
-        self.categories = ["Matematyka", "Mity i dzieje starożytne", "Fizyka",
-        "Chemia Organiczna", "Historia Sztuki", "Geografia",
-        "Informatyka", "Biologia", "Literatura Piękna"]
+        let gameController = GameController.shared
+        self.categories = gameController.getCategories()
         
         let url = URL(fileURLWithPath: "/Users/lukaszmichalak/myDocuments/Projects/Awantura o kase/Awantura o kase II Edycja/Assets/Audio/drawCategory.mp3")
         
@@ -47,6 +46,10 @@ class ReelController {
         }
         
         return winningIndex!
+    }
+    
+    public func resetWinningIndex() {
+        winningIndex = nil
     }
     
 }

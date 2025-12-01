@@ -7,8 +7,8 @@ struct Awantura_o_KaseApp: App {
     
     var body: some Scene {
         
-        WindowGroup("Host View") {
-            HostView()
+        WindowGroup("Ibisz View") {
+            IbiszView()
         }
         
         WindowGroup("TV") {

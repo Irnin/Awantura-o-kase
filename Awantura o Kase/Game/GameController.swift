@@ -86,3 +86,14 @@ extension GameController {
         return game.getTvScene()
     }
 }
+
+// MARK: - Questions
+extension GameController {
+    public func getCategories() -> [String] {
+        return game.questions.map { $0.category }
+    }
+    
+    public func getQuestions() -> [Question] {
+        return game.questions
+    }
+}

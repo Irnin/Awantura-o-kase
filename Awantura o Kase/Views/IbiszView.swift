@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HostView: View {
+struct IbiszView: View {
     @State var showInspector = true
     
     var body: some View {
@@ -18,6 +18,11 @@ struct HostView: View {
             AuctionHostView()
                 .tabItem {
                     Label("Auction", systemImage: "hammer.fill")
+                }
+            
+            QuestionWorkbench()
+                .tabItem {
+                    Label("Question workbench", systemImage: "questionmark.text.page.fill")
                 }
             
             VARHostView()

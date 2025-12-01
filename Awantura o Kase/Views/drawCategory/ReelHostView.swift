@@ -14,6 +14,7 @@ struct ReelHostView: View {
             Button("Draw Category") {
                 startSpinning()
             }
+            Spacer()
         }
     }
     

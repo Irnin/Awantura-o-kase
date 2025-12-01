@@ -1,4 +1,9 @@
+import Foundation
+import os
+
 struct GameModel {
+    let logger = Logger()
+    
     var gameState: GameState = .preGame
     var tvScene: TVscene = .preGame
     var teams: [Team] = []
@@ -8,6 +13,10 @@ struct GameModel {
     var currentVARrecord: String = ""
     var isVARreocording: Bool = false
     
+    // Questions
+    var questionsDatabasePath: String = "/Users/lukaszmichalak/Documents/categories.json"
+    var questions: [Question] = []
+    
     init() {
         
         // Preaparing teams
@@ -15,6 +24,9 @@ struct GameModel {
         teams.append(Team(color: .blue))
         teams.append(Team(color: .green))
         teams.append(Team(color: .yellow))
+        
+        // Questions
+        self.readQuestionsFromJson()
     }
     
     public func getTeam(withColor color: TeamColor) -> Team {
@@ -55,5 +67,31 @@ extension GameModel {
     
     public func getTvScene() -> TVscene {
         return self.tvScene
+    }
+}
+
+
+// MARK: - Questions
+extension GameModel {
+    private mutating func readQuestionsFromJson() {
+        let path = self.questionsDatabasePath
+        
+        guard let url = URL(string: path) else {
+            logger.debug("Can not read from \(path)")
+            return
+        }
+        
+        do {
+            let fileHandle = try FileHandle(forReadingFrom: url)
+            let data = fileHandle.readDataToEndOfFile()
+            fileHandle.closeFile()
+            
+            let decoder = JSONDecoder()
+            self.questions = try decoder.decode([Question].self, from: data)
+            
+        } catch {
+            logger.error("Can not read data from file \(path):")
+            logger.error("\(error)")
+        }
     }
 }

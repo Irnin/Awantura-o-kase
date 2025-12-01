@@ -33,7 +33,7 @@ struct WheelView: View {
     @Binding var isSpinning: Bool
     let onCategorySelected: (String) -> Void
     
-    let itemHeight: CGFloat = 80 // Wysokość elementu
+    let itemHeight: CGFloat = 80
     @State private var offset: CGFloat = 0
     
     var repeatedCategories: [String] {
@@ -108,13 +108,15 @@ struct WheelView: View {
         
         withAnimation(.timingCurve(
             0.1, 0.7, 0.4, 1.0,
-            duration: 13 // Używamy losowego czasu
+            duration: 13
         )) {
             self.offset = finalOffset
         } completion: {
             self.offset = finalOffset
             self.isSpinning = false
-            onCategorySelected(categories[winningIndex])
+            controller.resetWinningIndex()
+            
+            // Placeholder for saving drafted category
         }
     }
 }
@@ -154,7 +156,7 @@ struct CategoryRow: View {
     
     var body: some View {
         Text(text)
-            .font(Font.custom("LED counter 7", size: 40))
+            .font(Font.custom("Windows Dots", size: 40))
             .foregroundColor(isSelected ? .black : .white)
             .frame(height: height)
             .frame(maxWidth: .infinity)
