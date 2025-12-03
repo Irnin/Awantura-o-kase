@@ -10,15 +10,15 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingColumnNumber</key>
-					<string>19</string>
+					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>118</string>
+					<string>120</string>
 					<key>StartingColumnNumber</key>
-					<string>19</string>
+					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>118</string>
+					<string>119</string>
 					<key>Timestamp</key>
-					<string>786307534.318422</string>
+					<string>786384744.589234</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -34,15 +34,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string></string>
+				<string>            // Placeholder for saving drafted category
+</string>
 				<key>leading</key>
-				<string>            controller.resetWinningIndex()
+				<string>            
             
-            // Plac</string>
+</string>
 				<key>trailing</key>
-				<string>eholder for saving drafted category
-        }
+				<string>        }
     }
+}
 </string>
 			</dict>
 			<key>type</key>

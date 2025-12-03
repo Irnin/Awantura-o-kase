@@ -7,9 +7,13 @@ import os
 class AuctionController {
     static let shared = AuctionController()
     
+    // Dependency
+    private let controller = GameController.shared
+    
+    // Variables
     private(set) var selectedTeam: TeamColor?
     
-    private(set) var winningTeam: TeamColor?
+    private(set) var auctionWinner: TeamColor?
     private(set) var currentBid: Int = 0
     
     var temporaryInput: [TeamColor: Int] = [.blue: 0, .green: 0, .yellow: 0]
@@ -50,7 +54,8 @@ class AuctionController {
         let amountDifference = actualAmount - bidAmount[team]!
         
         bidAmount[team]! = currentBid
-        winningTeam = team
+        auctionWinner = team
+        controller.setAuctionWinner(team)
         
         gameController.deduct(fromTeam: team, amount: amountDifference)
         gameController.increasePool(amount: amountDifference)
@@ -80,7 +85,7 @@ class AuctionController {
     
     // MARK: - Get winner details
     public func getWinnerTeamName() -> String {
-        guard let team = winningTeam else {
+        guard let team = auctionWinner else {
             return ""
         }
         
@@ -88,7 +93,7 @@ class AuctionController {
     }
     
     public func getWinnerTeamColor() -> Color {
-        guard let team = winningTeam else {
+        guard let team = auctionWinner else {
             return Color.clear
         }
         

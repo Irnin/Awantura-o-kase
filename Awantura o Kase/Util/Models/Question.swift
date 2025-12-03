@@ -1,6 +1,6 @@
 import Foundation
 
-struct Question: Identifiable, Codable {
+final class Question: Identifiable, Codable {
     var id = UUID()
     public var body: String
     public var category: String

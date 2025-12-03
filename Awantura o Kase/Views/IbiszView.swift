@@ -20,6 +20,11 @@ struct IbiszView: View {
                     Label("Auction", systemImage: "hammer.fill")
                 }
             
+            QuestionHostView()
+                .tabItem {
+                    Label("Question", systemImage: "clock.badge.questionmark.fill")
+                }
+            
             QuestionWorkbench()
                 .tabItem {
                     Label("Question workbench", systemImage: "questionmark.text.page.fill")

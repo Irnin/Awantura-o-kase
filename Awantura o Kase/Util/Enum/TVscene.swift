@@ -4,6 +4,7 @@ enum TVscene: CaseIterable {
     case preGame
     case drawCategory
     case auction
+    case question
     case ads
     case varReplay
     
@@ -15,6 +16,8 @@ enum TVscene: CaseIterable {
             return "Draw Category"
         case .auction:
             return "Auction"
+        case .question:
+            return "Question"
         case .ads:
             return "Ads"
         case .varReplay:

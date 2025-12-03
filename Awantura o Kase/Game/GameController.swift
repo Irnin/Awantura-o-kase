@@ -19,6 +19,29 @@ class GameController {
         game.gameState = gameState
     }
     
+    public func setAuctionWinner(_ team: TeamColor) {
+        game.auctionWinner = team
+    }
+    
+    public func getAuctionWinner() -> TeamColor? {
+        return game.auctionWinner
+    }
+    
+    public func getTeams() -> [Team] {
+        return game.teams
+    }
+    
+    public func getTeam(ofColor color: TeamColor) -> Team {
+        return game.getTeam(withColor: color)
+    }
+    
+    private init() {
+        game = GameModel()
+    }
+}
+
+// MARK: - Managing money
+extension GameController {
     public func addBalance(team: TeamColor, amount: Int) {
         game.addBalance(forTeam: team, balance: amount)
     }
@@ -40,21 +63,9 @@ class GameController {
     public func getPoolOfMoney() -> Int {
         return game.poolOfMoney
     }
-    
-    public func getTeams() -> [Team] {
-        return game.teams
-    }
-    
-    public func getTeam(ofColor color: TeamColor) -> Team {
-        return game.getTeam(withColor: color)
-    }
-    
-    private init() {
-        game = GameModel()
-    }
 }
 
-// MARK: - Controlling VAR
+// MARK: - VAR
 extension GameController {
     public func saveVarVideoLocation(at path: String) {
         let varController = VARController.shared
@@ -89,11 +100,37 @@ extension GameController {
 
 // MARK: - Questions
 extension GameController {
-    public func getCategories() -> [String] {
-        return game.questions.map { $0.category }
+    public func getCategories() -> Set<String> {
+        
+        return Set(game.questions.map { $0.category })
+    }
+    
+    public func getCurrentCategory() -> String {
+        return game.currentCategory
     }
     
     public func getQuestions() -> [Question] {
         return game.questions
+    }
+    
+    public func getQuestionNumber() -> Int {
+        return game.questionNumber
+    }
+    
+    public func selectCategory(_ category: String) {
+        game.currentCategory = category
+    }
+    
+    public func getQuestionForCurrentCategory() -> Question? {
+        let currentCategory = game.currentCategory
+        return getQuestionOf(category: currentCategory)
+    }
+    
+    public func getQuestionOf(category: String) -> Question? {
+        let categoryQuestions = game.questions.filter({$0.category == category  && $0.asked == false})
+        var question = categoryQuestions.randomElement()
+        question?.asked = true
+        
+        return question
     }
 }

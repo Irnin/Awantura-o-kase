@@ -4,10 +4,16 @@ import os
 struct GameModel {
     let logger = Logger()
     
+    // Preparring game
     var gameState: GameState = .preGame
     var tvScene: TVscene = .preGame
+    
+    // Teams
     var teams: [Team] = []
+    
+    // Auction
     var poolOfMoney: Int = 0
+    var auctionWinner: TeamColor? = nil
     
     // VAR
     var currentVARrecord: String = ""
@@ -16,9 +22,10 @@ struct GameModel {
     // Questions
     var questionsDatabasePath: String = "/Users/lukaszmichalak/Documents/categories.json"
     var questions: [Question] = []
+    var currentCategory: String = ""
+    var questionNumber: Int = 0
     
     init() {
-        
         // Preaparing teams
         teams.removeAll()
         teams.append(Team(color: .blue))
@@ -69,7 +76,6 @@ extension GameModel {
         return self.tvScene
     }
 }
-
 
 // MARK: - Questions
 extension GameModel {
