@@ -55,5 +55,4 @@ class ReelController {
     public func resetWinningIndex() {
         winningIndex = nil
     }
-    
 }

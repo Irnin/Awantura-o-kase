@@ -128,9 +128,20 @@ extension GameController {
     
     public func getQuestionOf(category: String) -> Question? {
         let categoryQuestions = game.questions.filter({$0.category == category  && $0.asked == false})
-        var question = categoryQuestions.randomElement()
+        let question = categoryQuestions.randomElement()
         question?.asked = true
         
         return question
+    }
+}
+
+// MARK: - Media
+extension GameController {
+    public func allowToPlaySounds(_ value: Bool) {
+        game.playSounds = value
+    }
+    
+    public func canPlaySounds() -> Bool {
+        return game.playSounds
     }
 }

@@ -25,6 +25,9 @@ struct GameModel {
     var currentCategory: String = ""
     var questionNumber: Int = 0
     
+    // Media
+    var playSounds: Bool = true
+    
     init() {
         // Preaparing teams
         teams.removeAll()

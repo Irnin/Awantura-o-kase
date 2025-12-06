@@ -14,7 +14,6 @@ struct Awantura_o_KaseApp: App {
         WindowGroup("TV") {
             TvView()
         }
-        
         .commands {
             CommandMenu("DEBUG") {
                 Menu("Game State") {
@@ -28,5 +27,11 @@ struct Awantura_o_KaseApp: App {
                 }
             }
         }
+        
+        #if os(macOS)
+        Settings {
+            SettingsView()
+        }
+        #endif
     }
 }
