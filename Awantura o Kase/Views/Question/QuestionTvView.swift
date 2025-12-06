@@ -5,10 +5,9 @@ struct QuestionTvView: View {
     
     var body: some View {
         VStack(spacing: 0) {
+            Spacer()
             
             HStack {
-                Spacer()
-                
                 Text("\(controller.getTimeFormatted())")
                     .font(Font.custom("LED counter 7", size: 160))
                     .minimumScaleFactor(0.1)
@@ -16,6 +15,14 @@ struct QuestionTvView: View {
                     .bold()
                     .font(.headline)
                     .padding(20)
+            }
+            
+            Spacer()
+            
+            if(controller.containAttachment()) {
+                Text("Placeholder")
+                
+                Spacer()
             }
             
             HStack {
@@ -30,16 +37,29 @@ struct QuestionTvView: View {
             .padding(20)
             .background(Color.black)
             
-            HStack {
-                Spacer()
-                
-                Text(controller.getQuestionBody())
-                    .font(.system(size: 30, weight: .bold))
-                
-                Spacer()
+            if(controller.getQuestionBody() != "") {
+                HStack {
+                    Text(controller.getQuestionBody())
+                        .frame(maxWidth: .infinity)
+                        .font(.system(size: 30, weight: .bold))
+                }
+                .padding(20)
+                .background(controller.getTeamColor())
             }
-            .padding(20)
-            .background(controller.getTeamColor())
+            
+            
+            if(controller.showHint) {
+                HStack {
+                    ForEach(controller.getHint(), id: \.self) { hint in
+                        Text(hint)
+                            .padding(20)
+                            .font(.system(size: 30, weight: .bold))
+                            .frame(maxWidth: .infinity)
+                    }
+                }
+                .padding(20)
+                .background(controller.getTeamColor())
+            }
         }
     }
 }

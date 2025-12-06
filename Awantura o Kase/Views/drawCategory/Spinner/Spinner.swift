@@ -7,8 +7,6 @@ struct Spinner: View {
     
     var body: some View {
         VStack {
-            Spacer()
-
             WheelView(
                 categories: controller.getCategories(),
                 isSpinning: $controller.isSpinning,
@@ -20,8 +18,6 @@ struct Spinner: View {
             .background(Color.black)
             .cornerRadius(10)
             .shadow(color: .yellow.opacity(0.5), radius: 5)
-            
-            Spacer()
         }
     }
 }

@@ -4,42 +4,55 @@ struct QuestionHostView: View {
     private var controller = QuestionController.shared
     
     var body: some View {
-        HStack(alignment: .top, spacing: 20) {
+        
+        VStack {
+            MyHeader(header: "Question")
+            
+            Spacer()
+            
+            HStack(alignment: .top, spacing: 20) {
 
-            GroupBox("Question") {
-                VStack(alignment: .leading, spacing: 12) {
-                    
-                    Text(controller.getQuestionBody())
-                        .font(.body)
-                        .padding(.bottom, 4)
+                GroupBox("Question") {
+                    VStack(alignment: .leading, spacing: 12) {
+                        
+                        Text(controller.getQuestionBody())
+                            .font(.body)
+                            .padding(.bottom, 4)
 
-                    Button("Get Question") {
-                        controller.findQuestion()
+                        Button("Find question") {
+                            controller.findQuestion()
+                        }
+                        .buttonStyle(.borderedProminent)
+                        
+                        Button("Show hints") {
+                            controller.showHintForPlayer()
+                        }
                     }
-                    .buttonStyle(.borderedProminent)
+                    .padding()
                 }
-                .padding()
-            }
-            .frame(maxWidth: 300)
+                .frame(maxWidth: 300)
 
-            GroupBox("Timer") {
-                VStack(alignment: .leading, spacing: 12) {
+                GroupBox("Timer") {
+                    VStack(alignment: .leading, spacing: 12) {
 
-                    Text("Timer: \(controller.getTimeFormatted())")
-                        .font(.title3)
-                        .bold()
-                        .padding(.bottom, 4)
+                        Text("Timer: \(controller.getTimeFormatted())")
+                            .font(.title3)
+                            .bold()
+                            .padding(.bottom, 4)
 
-                    HStack(spacing: 10) {
-                        Button("Start") { controller.startTimer() }
-                        Button("Stop") { controller.stopTimer() }
-                        Button("Reset") { controller.resetTimer() }
+                        HStack(spacing: 10) {
+                            Button("Start") { controller.startTimer() }
+                            Button("Stop") { controller.stopTimer() }
+                            Button("Reset") { controller.resetTimer() }
+                        }
+                        .buttonStyle(.bordered)
                     }
-                    .buttonStyle(.bordered)
+                    .padding()
                 }
-                .padding()
+                .frame(maxWidth: 300)
             }
-            .frame(maxWidth: 300)
+            
+            Spacer()
         }
         .padding(20)
     }

@@ -10,6 +10,7 @@ struct BasicInformationsInspector: View {
         
         Text(String("Current phase: \(controller.getCurrentGameState())"))
         
+        Text(String("Question: \(controller.getQuestionNumber())"))
         Text(String("Category: \(controller.getCurrentCategory())"))
         
         Divider()

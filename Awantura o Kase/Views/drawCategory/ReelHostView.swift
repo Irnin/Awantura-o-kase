@@ -8,9 +8,14 @@ struct ReelHostView: View {
     
     var body: some View {
         VStack {
+            MyHeader(header: "Draw Category")
+            
+            Spacer()
+            
             Spinner()
             
             Spacer()
+            
             HStack() {
                 Button("Draw Category") {
                     startSpinning()
@@ -19,9 +24,8 @@ struct ReelHostView: View {
                     quickSpin()
                 }
             }
-            
-            Spacer()
         }
+        .padding(20)
     }
     
     func startSpinning() {

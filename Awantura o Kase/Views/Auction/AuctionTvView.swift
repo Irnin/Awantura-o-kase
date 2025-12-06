@@ -3,13 +3,14 @@ import PoweredTouchBar
 
 struct AuctionTvView: View {
     private let auctionController = AuctionController.shared
+    private let controller = GameController.shared
     
     var body: some View {
         let teams = auctionController.getTeams()
         
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
             GridRow {
-                Text("LICYTACJA")
+                Text(String("LICYTACJA \(controller.getCurrentCategory().uppercased())"))
                     .font(.system(size: auctionController.tvFontSize, weight: .bold))
                     .minimumScaleFactor(0.1)
                     .lineLimit(1)

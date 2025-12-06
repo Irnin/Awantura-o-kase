@@ -11,12 +11,18 @@ class QuestionController {
     
     // Variables
     private var currentQuestion: Question?
+    private(set) var showHint: Bool = false
+    private(set) var hints: [String] = []
     
     var timer = Timer()
     private var timeLeft: Int = 60
     private var timerOn: Bool = false
     
     // Methods
+    public func reset() {
+        showHint = false
+    }
+    
     public func getQuestionNumber() -> String {
         return String(controller.getQuestionNumber())
     }
@@ -36,6 +42,8 @@ class QuestionController {
     
     public func findQuestion() {
         currentQuestion = controller.getQuestionForCurrentCategory()
+        
+        hints = currentQuestion!.getHits()
     }
     
     public func getQuestionBody() -> String {
@@ -44,6 +52,27 @@ class QuestionController {
         }
         
         return body
+    }
+    
+    public func getHint() -> [String] {
+        return hints
+    }
+    
+    public func showHintForPlayer() {
+        showHint = true
+        
+    }
+    
+    public func containAttachment() -> Bool {
+        guard let question = currentQuestion else {
+            return false
+        }
+        
+        if(question.attachmentType() == "none") {
+            return false
+        }
+        
+        return true
     }
 }
 

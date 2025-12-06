@@ -17,6 +17,17 @@ final class Question: Identifiable, Codable {
         return [correctAnser, hintA, hintB, hintC].shuffled()
     }
     
+    public func attachmentType() -> String {
+        if(attachmentPath.hasSuffix(".png")) {
+            return "image"
+        }
+        else if(attachmentPath.hasSuffix(".mp3")) {
+            return "audio"
+        }
+        
+        return "none"
+    }
+    
     public var wasAsked: String {
         return asked ? "Used" : ""
     }

@@ -9,9 +9,9 @@ struct AuctionHostView: View {
     
     var body: some View {
         VStack {
-            Text("Auction")
-                .font(.title)
-                .foregroundColor(.accentColor)
+            MyHeader(header: "Auction")
+            
+            Spacer()
             
             Grid(horizontalSpacing: 0, verticalSpacing: 0) {
                 GridRow {
@@ -96,7 +96,10 @@ struct AuctionHostView: View {
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
             }
+            
+            Spacer()
         }
+        .padding(20)
         .poweredTouchBar {
             let blueTeam = controller.getTeam(ofColor: .blue)
             let greenTeam = controller.getTeam(ofColor: .green)
