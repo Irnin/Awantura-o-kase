@@ -69,17 +69,6 @@ extension GameModel {
     }
 }
 
-// MARK: - Controlling TV view
-extension GameModel {
-    public mutating func setTvScene(_ view: TVscene){
-        self.tvScene = view
-    }
-    
-    public func getTvScene() -> TVscene {
-        return self.tvScene
-    }
-}
-
 // MARK: - Questions
 extension GameModel {
     private mutating func readQuestionsFromJson() {
@@ -102,5 +91,16 @@ extension GameModel {
             logger.error("Can not read data from file \(path):")
             logger.error("\(error)")
         }
+    }
+}
+
+// MARK: - Controlling TV view
+extension GameModel {
+    public mutating func setTvScene(_ view: TVscene){
+        self.tvScene = view
+    }
+    
+    public func getTvScene() -> TVscene {
+        return self.tvScene
     }
 }

@@ -5,6 +5,7 @@ import SwiftUI
 struct ReelHostView: View {
     
     @Bindable private var controller = ReelController.shared
+    @Bindable private var gameController = GameController.shared
     
     var body: some View {
         VStack {
@@ -22,6 +23,10 @@ struct ReelHostView: View {
                 }
                 Button("Quick Randomize") {
                     quickSpin()
+                }
+                
+                Button("Next stage", systemImage: "arrow.right.square.fill") {
+                    gameController.jumpToAuction()
                 }
             }
         }

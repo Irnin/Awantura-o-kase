@@ -4,6 +4,7 @@ import AppKit
 
 struct AuctionHostView: View {
     @Bindable private var controller = AuctionController.shared
+    @Bindable private var gameController: GameController = GameController.shared
     @FocusState private var selectedTeam: TeamColor?
     @State var showInspector = true
     
@@ -14,12 +15,26 @@ struct AuctionHostView: View {
             Spacer()
             
             Grid(horizontalSpacing: 0, verticalSpacing: 0) {
+                
                 GridRow {
                     Text("\(controller.getWinnerTeamName()) \(controller.getCurrentBind())")
                         .font(.system(size: 20, weight: .bold))
                         .gridCellColumns(5)
                         .frame(maxWidth: .infinity, minHeight: 44)
                         .background(controller.getWinnerTeamColor())
+                }
+                
+                GridRow {
+                    Text("")
+                    
+                    Text(" ")
+                        .minimumScaleFactor(0.1)
+                        .lineLimit(1)
+                        .gridCellColumns(3)
+                        .frame(maxWidth: .infinity)
+                        .background(controller.getSelectedTeamColor())
+                    
+                    Text("")
                 }
                 
                 GridRow {
@@ -80,7 +95,7 @@ struct AuctionHostView: View {
                 }
                 
                 GridRow {
-                    Text("Stan Konta")
+                    Text("Balance")
                         .frame(maxWidth: .infinity, minHeight: 44)
                 
                     ForEach(controller.getTeams()) { team in
@@ -94,6 +109,29 @@ struct AuctionHostView: View {
                     
                     Text("N/A")
                         .frame(maxWidth: .infinity, minHeight: 44)
+                }
+                
+                GridRow {
+                    Text("")
+                    
+                    Text(" ")
+                        .minimumScaleFactor(0.1)
+                        .lineLimit(1)
+                        .gridCellColumns(3)
+                        .frame(maxWidth: .infinity)
+                        .background(controller.getSelectedTeamColor())
+                    
+                    Text("")
+                }
+            }
+            
+            HStack {
+                Button("Start Auction", systemImage: "play.fill") {
+                    controller.startAuction()
+                }
+                
+                Button("Next stage", systemImage: "arrow.right.square.fill") {
+                    gameController.jumpToQuestion()
                 }
             }
             

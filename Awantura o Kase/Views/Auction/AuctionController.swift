@@ -38,6 +38,26 @@ class AuctionController {
         selectedTeam = color
     }
     
+    public func startAuction() {
+        let amount = 500
+        
+        self.startAuctionForTeam(.blue, amount: amount)
+        self.startAuctionForTeam(.green, amount: amount)
+        self.startAuctionForTeam(.yellow, amount: amount)
+    }
+    
+    private func startAuctionForTeam(_ team: TeamColor, amount: Int) {
+        
+        // Team can not play
+        if gameController.getBalance(ofTeam: team) + getBid(ofTeam: team) < amount {
+            return
+        }
+        
+        bidAmount[team]! = amount
+        gameController.deduct(fromTeam: team, amount: amount)
+        gameController.increasePool(amount: amount)
+    }
+    
     func outbid(team: TeamColor, amount: Int) {
         let actualAmount = amount * 100
         
@@ -98,6 +118,22 @@ class AuctionController {
         }
         
         return gameController.getTeam(ofColor: team).color
+    }
+    
+    public func getSelectedTeamName() -> String {
+        guard let selectedTeamName = selectedTeam else {
+            return ""
+        }
+        
+        return gameController.getTeam(ofColor: selectedTeamName).name
+    }
+    
+    public func getSelectedTeamColor() -> Color {
+        guard let selectedTeamColor = selectedTeam else {
+            return Color.clear
+        }
+        
+        return gameController.getTeam(ofColor: selectedTeamColor).color
     }
     
     public func getCurrentBind() -> String {

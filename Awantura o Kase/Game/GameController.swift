@@ -4,13 +4,10 @@ import Foundation
 class GameController {
     static let shared = GameController()
     private var game: GameModel
-
+    
+    public var hostScene: HostScene = .preGame
     
     // MARK: - Game State
-    public func startGame() {
-        game.gameState = .auction
-    }
-    
     public func getCurrentGameState() -> GameState {
         return game.gameState
     }
@@ -87,17 +84,6 @@ extension GameController {
     }
 }
 
-// MARK: - Controlling TV
-extension GameController {
-    public func setTvScene(_ scene: TVscene) {
-        game.setTvScene(scene)
-    }
-    
-    public func getTvScene() -> TVscene {
-        return game.getTvScene()
-    }
-}
-
 // MARK: - Questions
 extension GameController {
     public func getCategories() -> Set<String> {
@@ -143,5 +129,56 @@ extension GameController {
     
     public func canPlaySounds() -> Bool {
         return game.playSounds
+    }
+}
+
+// MARK: - Game stages
+extension GameController {
+    
+    public func startGame() {
+        self.jumpToDrawCategory()
+    }
+    
+    public func jumpToDrawCategory() {
+        game.gameState = .drawCategory
+        
+        setTvScene(.drawCategory)
+        setHostScene(.drawCategory)
+    }
+    
+    public func jumpToAuction() {
+        game.gameState = .auction
+        
+        setTvScene(.auction)
+        setHostScene(.auction)
+    }
+    
+    public func jumpToQuestion() {
+        game.gameState = .question
+        
+        setTvScene(.question)
+        setHostScene(.question)
+    }
+}
+
+// MARK: - Controlling TV
+extension GameController {
+    public func setTvScene(_ scene: TVscene) {
+        game.setTvScene(scene)
+    }
+    
+    public func getTvScene() -> TVscene {
+        return game.getTvScene()
+    }
+}
+
+// MARK: - Controlling Host View
+extension GameController {
+    public func setHostScene(_ scene: HostScene) {
+        hostScene = scene
+    }
+    
+    public func getHostScene() -> HostScene {
+        return hostScene
     }
 }

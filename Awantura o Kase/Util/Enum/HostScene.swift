@@ -1,12 +1,13 @@
 import Foundation
 
-enum Hostscene: CaseIterable {
+enum HostScene: CaseIterable {
     case preGame
     case drawCategory
     case auction
     case question
     case ads
     case varReplay
+    case questionWorkbench
     
     var displayName: String {
         switch(self) {
@@ -22,6 +23,8 @@ enum Hostscene: CaseIterable {
             return "Ads"
         case .varReplay:
             return "VAR"
+        case .questionWorkbench:
+            return "Question Workbench"
         }
     }
 }
