@@ -13,6 +13,7 @@ struct GameModel {
     
     // Auction
     var poolOfMoney: Int = 0
+    var HostPoolOfMoney: Int = 0
     var auctionWinner: TeamColor? = nil
     
     // VAR

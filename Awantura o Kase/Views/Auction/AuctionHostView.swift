@@ -6,7 +6,10 @@ struct AuctionHostView: View {
     @Bindable private var controller = AuctionController.shared
     @Bindable private var gameController: GameController = GameController.shared
     @FocusState private var selectedTeam: TeamColor?
+    
     @State var showInspector = true
+    @State private var showPenaltyPopover = false
+    @State private var showAddPoolPopover = false
     
     var body: some View {
         VStack {
@@ -48,7 +51,7 @@ struct AuctionHostView: View {
                             .background(team.color)
                     }
                     
-                    Text("Pula")
+                    Text("Pool")
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
                 
@@ -90,7 +93,7 @@ struct AuctionHostView: View {
                             .foregroundColor(.white)
                     }
                     
-                    Text("Pula Admina:")
+                    Text("Host pool of money:")
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
                 
@@ -107,7 +110,7 @@ struct AuctionHostView: View {
                             .foregroundColor(.white)
                     }
                     
-                    Text("N/A")
+                    Text(String(gameController.getHostPoolOfMoney()))
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
                 
@@ -130,9 +133,38 @@ struct AuctionHostView: View {
                     controller.startAuction()
                 }
                 
+                Button("imposition of penalty") {
+                    showPenaltyPopover = true
+                }
+                .popover(isPresented: $showPenaltyPopover) {
+                    NumberInputPopover(
+                        message: "Provide amount for team \(controller.getSelectedTeamName())",
+                        onConfirm: { number in
+                            controller.givePenalty(amount: number)
+                        }
+                    )
+                    .frame(width: 240)
+                }
+                
+                Button("Increment Pool") {
+                    showAddPoolPopover = true
+                }
+                .popover(isPresented: $showAddPoolPopover) {
+                    NumberInputPopover(
+                        message: "Provide amount to increese pool",
+                        onConfirm: { number in
+                            controller.incrementPoolFromHost(amount: number)
+                        }
+                    )
+                    .frame(width: 240)
+                }
+                
+                
                 Button("Next stage", systemImage: "arrow.right.square.fill") {
                     gameController.jumpToQuestion()
                 }
+                
+                
             }
             
             Spacer()

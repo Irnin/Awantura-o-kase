@@ -14,7 +14,6 @@ struct QuestionHostView: View {
 
                 GroupBox("Question") {
                     VStack(alignment: .leading, spacing: 12) {
-                        
                         Text(controller.getQuestionBody())
                             .font(.body)
                             .padding(.bottom, 4)
@@ -46,6 +45,18 @@ struct QuestionHostView: View {
                             Button("Reset") { controller.resetTimer() }
                         }
                         .buttonStyle(.bordered)
+                    }
+                    .padding()
+                }
+                .frame(maxWidth: 300)
+                
+                GroupBox("Answer") {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Button("Correct Answer") { controller.correctAnswer() }
+                        Button("Incorrect Answer") { controller.incorrectAnswer() }
+                        Divider()
+                        
+                        Button("Next turn") { controller.nextTurn() }
                     }
                     .padding()
                 }

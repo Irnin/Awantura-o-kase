@@ -14,6 +14,8 @@ struct TvView: View {
                 AuctionTvView()
             case .question:
                 QuestionTvView()
+            case .correctAnswer:
+                CorrectAnswerTvView()
             case .ads:
                 AdPlayerTvView()
             case .varReplay:

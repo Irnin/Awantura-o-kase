@@ -111,9 +111,6 @@ struct WheelView: View {
             self.offset = finalOffset
             self.isSpinning = false
             controller.resetWinningIndex()
-            
-            
-            // Placeholder for saving drafted category
         }
     }
 }

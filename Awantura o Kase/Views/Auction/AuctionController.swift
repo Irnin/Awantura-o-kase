@@ -31,6 +31,14 @@ class AuctionController {
         
     }
     
+    public func reset() {
+        currentBid = 0
+        
+        bidAmount[.blue] = 0
+        bidAmount[.green] = 0
+        bidAmount[.yellow] = 0
+    }
+    
     /// Method is used to point
     /// - Parameter color: which team is selected
     func selectTeam(_ color: TeamColor) {
@@ -80,6 +88,20 @@ class AuctionController {
         gameController.deduct(fromTeam: team, amount: amountDifference)
         gameController.increasePool(amount: amountDifference)
         resetTemporaryInput()
+    }
+    
+    public func givePenalty(amount: Int) {
+        guard let team = selectedTeam else {
+            return
+        }
+        
+        gameController.deduct(fromTeam: team, amount: amount)
+        gameController.increaseHostPool(amount: amount)
+    }
+    
+    public func incrementPoolFromHost(amount: Int) {
+        gameController.decreaseHostPool(amount: amount)
+        gameController.increasePool(amount: amount)
     }
     
     public func getBid(ofTeam team: TeamColor) -> Int {

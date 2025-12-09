@@ -18,8 +18,16 @@ class QuestionController {
     private var timeLeft: Int = 60
     private var timerOn: Bool = false
     
+    // Variables to winning animation
+    public var startMoneyAnimation: Int = 0
+    public var endMoneyAnimation: Int = 0
+    
     // Methods
     public func reset() {
+        currentQuestion = nil
+        timer.invalidate()
+        timeLeft = 60
+        timerOn = false
         showHint = false
     }
     
@@ -77,6 +85,35 @@ class QuestionController {
 }
 
 extension QuestionController {
+    public func correctAnswer() {
+        guard let auctionWinner = controller.getAuctionWinner() else {
+            return
+        }
+        
+        let amount = controller.getPoolOfMoney()
+        controller.emptyPool()
+        
+        startMoneyAnimation = controller.getBalance(ofTeam: auctionWinner)
+        endMoneyAnimation = startMoneyAnimation + amount
+        
+        controller.addBalance(team: auctionWinner, amount: amount)
+        controller.setTvScene(.correctAnswer)
+    }
+    
+    public func incorrectAnswer() {
+        
+    }
+    
+    public func nextTurn() {
+        startMoneyAnimation = 0
+        startMoneyAnimation = 0
+        timeLeft = 60
+        
+        controller.nextTurn()
+    }
+}
+
+extension QuestionController {
     public func resetTimer() {
         timeLeft = 60
         timerOn = false
@@ -97,6 +134,10 @@ extension QuestionController {
     
     private func timerClick() {
         self.timeLeft -= 1
+        
+        if(self.timeLeft == 0) {
+            self.stopTimer()
+        }
     }
     
     public func getTimeFormatted() -> String {

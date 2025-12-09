@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 @Observable
 class GameController {
@@ -22,6 +23,22 @@ class GameController {
     
     public func getAuctionWinner() -> TeamColor? {
         return game.auctionWinner
+    }
+    
+    public func getAuctionWinnerName() -> String {
+        guard let winner = game.auctionWinner else {
+            return "No winner"
+        }
+        
+        return self.getTeam(ofColor: winner).name
+    }
+    
+    public func getAuctionWinnerColor() -> Color {
+        guard let winner = game.auctionWinner else {
+            return Color.pink
+        }
+        
+        return self.getTeam(ofColor: winner).color
     }
     
     public func getTeams() -> [Team] {
@@ -57,8 +74,24 @@ extension GameController {
         game.poolOfMoney += amount
     }
     
+    public func emptyPool() {
+        game.poolOfMoney = 0
+    }
+    
     public func getPoolOfMoney() -> Int {
         return game.poolOfMoney
+    }
+    
+    public func increaseHostPool(amount: Int) {
+        game.HostPoolOfMoney += amount
+    }
+    
+    public func decreaseHostPool(amount: Int) {
+        game.HostPoolOfMoney -= amount
+    }
+    
+    public func getHostPoolOfMoney() -> Int {
+        return game.HostPoolOfMoney
     }
 }
 
@@ -137,6 +170,8 @@ extension GameController {
     
     public func startGame() {
         self.jumpToDrawCategory()
+        
+        game.questionNumber = 1
     }
     
     public func jumpToDrawCategory() {
@@ -158,6 +193,21 @@ extension GameController {
         
         setTvScene(.question)
         setHostScene(.question)
+    }
+    
+    public func nextTurn() {
+        game.questionNumber += 1
+        
+        game.auctionWinner = nil
+        game.currentCategory = ""
+        
+        let auctionController = AuctionController.shared
+        auctionController.reset()
+        
+        let questionController = QuestionController.shared
+        questionController.reset()
+        
+        self.jumpToDrawCategory()
     }
 }
 

@@ -13,6 +13,10 @@ struct BasicInformationsInspector: View {
         Text(String("Question: \(controller.getQuestionNumber())"))
         Text(String("Category: \(controller.getCurrentCategory())"))
         
+        Text(String("Blue: \(controller.getBalance(ofTeam: .blue).formatted())"))
+        Text(String("Green: \(controller.getBalance(ofTeam: .green).formatted())"))
+        Text(String("Yellow: \(controller.getBalance(ofTeam: .yellow).formatted())"))
+        
         Divider()
     }
 }
