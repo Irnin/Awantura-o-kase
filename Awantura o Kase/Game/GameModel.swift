@@ -21,7 +21,7 @@ struct GameModel {
     var isVARreocording: Bool = false
     
     // Questions
-    var questionsDatabasePath: String = "/Users/lukaszmichalak/Documents/categories.json"
+    var questionsDatabasePath: String = "/Users/lukaszmichalak/myDocuments/Projects/Awantura o kase/Awantura o kase II Edycja/Assets/questions.json"
     var questions: [Question] = []
     var currentCategory: String = ""
     var questionNumber: Int = 0

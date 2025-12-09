@@ -10,26 +10,35 @@ struct QuestionHostView: View {
             
             Spacer()
             
-            HStack(alignment: .top, spacing: 20) {
+            GroupBox("Question") {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Question: \(controller.getQuestionBody())")
+                        .font(.body)
+                        .padding(.bottom, 4)
+                    
+                    Text("Answer: \(controller.getQuestionAnswer())")
+                        .font(.body)
+                        .padding(.bottom, 4)
+                    
+                    Text("Attachment: \(controller.getAttachmentType())")
+                        .font(.body)
+                        .padding(.bottom, 4)
 
-                GroupBox("Question") {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(controller.getQuestionBody())
-                            .font(.body)
-                            .padding(.bottom, 4)
-
-                        Button("Find question") {
-                            controller.findQuestion()
-                        }
-                        .buttonStyle(.borderedProminent)
-                        
-                        Button("Show hints") {
-                            controller.showHintForPlayer()
-                        }
+                    Button("Find question") {
+                        controller.findQuestion()
                     }
-                    .padding()
+                    .buttonStyle(.borderedProminent)
+                    
+                    Button("Show hints") {
+                        controller.showHintForPlayer()
+                    }
                 }
-                .frame(maxWidth: 300)
+                .padding()
+            }
+            .padding(30)
+            .frame(maxWidth: .infinity)
+            
+            HStack(alignment: .top, spacing: 20) {
 
                 GroupBox("Timer") {
                     VStack(alignment: .leading, spacing: 12) {

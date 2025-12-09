@@ -30,6 +30,12 @@ struct IbiszView: View {
                 }
                 .tag(HostScene.question)
             
+            AdPlayerHostView()
+                .tabItem{
+                    Label("Ads", systemImage: "dollarsign")
+                }
+                .tag(HostScene.ads)
+            
             QuestionWorkbench()
                 .tabItem {
                     Label("Question workbench", systemImage: "questionmark.text.page.fill")

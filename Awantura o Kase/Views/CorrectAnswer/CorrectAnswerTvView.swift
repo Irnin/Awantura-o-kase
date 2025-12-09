@@ -8,7 +8,7 @@ struct CorrectAnswerTvView: View {
     @State private var currentValue: Int = 0
     @State private var startTime: Date?
     
-    let duration: Double = 3
+    let duration: Double = 2
 
     var body: some View {
         

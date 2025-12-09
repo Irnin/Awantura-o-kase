@@ -1,5 +1,6 @@
 import SwiftUI
 import Foundation
+import AVFoundation
 import os
 
 @Observable
@@ -8,6 +9,8 @@ class QuestionController {
     
     // Dependency
     private var controller = GameController.shared
+    
+    private var audioPlayer: AVAudioPlayer?
     
     // Variables
     private var currentQuestion: Question?
@@ -21,6 +24,16 @@ class QuestionController {
     // Variables to winning animation
     public var startMoneyAnimation: Int = 0
     public var endMoneyAnimation: Int = 0
+    
+    private init() {
+        let url = URL(fileURLWithPath: "/Users/lukaszmichalak/myDocuments/Projects/Awantura o kase/Awantura o kase II Edycja/Assets/Audio/winning.mp3")
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+        } catch {
+            print("Błąd podczas odtwarzania: \(error.localizedDescription)")
+        }
+    }
     
     // Methods
     public func reset() {
@@ -62,6 +75,14 @@ class QuestionController {
         return body
     }
     
+    public func getQuestionAnswer() -> String {
+        guard let body = currentQuestion?.correctAnser else {
+            return ""
+        }
+        
+        return body
+    }
+    
     public func getHint() -> [String] {
         return hints
     }
@@ -69,6 +90,14 @@ class QuestionController {
     public func showHintForPlayer() {
         showHint = true
         
+    }
+    
+    public func getAttachmentType() -> String {
+        guard let currentQuestion = currentQuestion else {
+            return ""
+        }
+        
+        return currentQuestion.attachmentType()
     }
     
     public func containAttachment() -> Bool {
@@ -97,6 +126,7 @@ extension QuestionController {
         endMoneyAnimation = startMoneyAnimation + amount
         
         controller.addBalance(team: auctionWinner, amount: amount)
+        audioPlayer?.play()
         controller.setTvScene(.correctAnswer)
     }
     
