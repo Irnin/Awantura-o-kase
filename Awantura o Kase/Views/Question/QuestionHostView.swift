@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct QuestionHostView: View {
-    private var controller = QuestionController.shared
+    @Bindable private var controller = QuestionController.shared
     
     var body: some View {
         
@@ -28,6 +28,26 @@ struct QuestionHostView: View {
                         controller.findQuestion()
                     }
                     .buttonStyle(.borderedProminent)
+                    
+                    Button("Sell hint") {
+                        controller.showSellHint = true
+                    }
+                    .popover(isPresented: $controller.showSellHint) {
+                        NumberInputPopover(
+                            message: "Sell hint for",
+                            onConfirm: { number in
+                                controller.sellHintFor(number)
+                            },
+                            onAppear: {
+                                controller.stopTimer()
+                            },
+                            onCancel: {
+                                controller.startTimer()
+                            }
+                            
+                        )
+                        .frame(width: 240)
+                    }
                     
                     Button("Show hints") {
                         controller.showHintForPlayer()

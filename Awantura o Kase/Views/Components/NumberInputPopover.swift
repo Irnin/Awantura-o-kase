@@ -4,6 +4,8 @@ struct NumberInputPopover: View {
     @State private var value: String = ""
     var message: String
     var onConfirm: (Int) -> Void
+    var onAppear: () -> Void = {}
+    var onCancel: () -> Void = {}
     
     @Environment(\.dismiss) private var dismiss
     
@@ -19,6 +21,7 @@ struct NumberInputPopover: View {
             HStack {
                 Spacer()
                 Button("Cancel") {
+                    onCancel()
                     dismiss()
                 }
                 Button("OK") {
@@ -31,5 +34,8 @@ struct NumberInputPopover: View {
             }
         }
         .padding(16)
+        .onAppear {
+            onAppear()
+        }
     }
 }

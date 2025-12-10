@@ -17,6 +17,8 @@ class QuestionController {
     private(set) var showHint: Bool = false
     private(set) var hints: [String] = []
     
+    public var showSellHint = false
+    
     var timer = Timer()
     private var timeLeft: Int = 60
     private var timerOn: Bool = false
@@ -42,6 +44,7 @@ class QuestionController {
         timeLeft = 60
         timerOn = false
         showHint = false
+        showSellHint = false
     }
     
     public func getQuestionNumber() -> String {
@@ -59,6 +62,23 @@ class QuestionController {
         
         let team = controller.getTeam(ofColor: auctionWinner)
         return team.color
+    }
+    
+    public func getTeamName() -> String {
+        guard let auctionWinner = controller.getAuctionWinner() else {
+            return "NO NAME TEAM"
+        }
+        
+        let team = controller.getTeam(ofColor: auctionWinner)
+        return team.name
+    }
+    
+    public func getTeamBalance() -> Int {
+        guard let auctionWinner = controller.getAuctionWinner() else {
+            return 0
+        }
+        
+        return controller.getBalance(ofTeam: auctionWinner)
     }
     
     public func findQuestion() {
@@ -87,9 +107,25 @@ class QuestionController {
         return hints
     }
     
+    public func sellHintFor(_ amount: Int) {
+        guard let team = controller.getAuctionWinner() else {
+            return
+        }
+        
+        if(controller.getBalance(ofTeam: team) < amount) {
+            return
+        }
+        
+        controller.increaseHostPool(amount: amount)
+        controller.deduct(fromTeam: team, amount: amount)
+        
+        showHintForPlayer()
+        timeLeft = 60
+        startTimer()
+    }
+    
     public func showHintForPlayer() {
         showHint = true
-        
     }
     
     public func getAttachmentType() -> String {
@@ -113,6 +149,7 @@ class QuestionController {
     }
 }
 
+// MARK: - Answers
 extension QuestionController {
     public func correctAnswer() {
         guard let auctionWinner = controller.getAuctionWinner() else {
@@ -143,6 +180,7 @@ extension QuestionController {
     }
 }
 
+// MARK: - Timer
 extension QuestionController {
     public func resetTimer() {
         timeLeft = 60
