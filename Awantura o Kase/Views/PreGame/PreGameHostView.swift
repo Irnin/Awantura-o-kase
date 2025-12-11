@@ -11,9 +11,24 @@ struct PreGameHostView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
             
-            Button("Next stage", systemImage: "arrow.right.square.fill") {
-                gameController.startGame()
+            VStack {
+                Spacer()
+                
+                Button{
+                    gameController.startGame()
+                } label: {
+
+                    Label("Start Game", systemImage: "arrow.right.square.fill")
+                        .font(.title2)
+                        .padding()
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.accentColor)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 40)
             }
+            
+            
         }
         
     }

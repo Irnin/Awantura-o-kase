@@ -36,6 +36,9 @@ class ReelController {
     }
     
     public func getCategories() -> [String] {
+        let gameController = GameController.shared
+        self.categories = Array(gameController.getCategories())
+        
         return categories
     }
     

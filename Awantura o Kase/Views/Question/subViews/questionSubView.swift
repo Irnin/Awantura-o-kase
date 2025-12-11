@@ -5,26 +5,37 @@ struct QuestionSubView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Spacer()
-            
-            HStack {
-                Text("\(controller.getTimeFormatted())")
-                    .font(Font.custom("LED counter 7", size: 160))
-                    .minimumScaleFactor(0.1)
-                    .lineLimit(1)
-                    .bold()
-                    .font(.headline)
-                    .padding(20)
+            VStack {
+                ZStack {
+                    if(controller.containAttachment()) {
+                        
+                        if let nsImage = NSImage(contentsOf: controller.getAttachmentURL()) {
+                            Image(nsImage: nsImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: .infinity,
+                                           maxHeight: .infinity,
+                                           alignment: .center)
+                        }
+                    }
+                    VStack {
+                        Spacer()
+                        
+                        HStack {
+                            Spacer()
+                            
+                            Text("\(controller.getTimeFormatted())")
+                                .font(Font.custom("LED counter 7", size: 160))
+                                .minimumScaleFactor(0.1)
+                                .lineLimit(1)
+                                .bold()
+                                .font(.headline)
+                                .padding(20)
+                        }
+                    }
+                }
             }
-            
-            Spacer()
-            
-            if(controller.containAttachment()) {
-                Text("Placeholder")
-                
-                Spacer()
-            }
-            
+    
             HStack {
                 Text("PYTANIE \(controller.getQuestionNumber())")
                     .font(.system(size: 30, weight: .bold))

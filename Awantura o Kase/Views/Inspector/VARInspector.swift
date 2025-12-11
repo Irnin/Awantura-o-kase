@@ -26,6 +26,8 @@ struct VARInspector: View {
                 
                 Button(action: {
                     Task {await obsController.saveReplyBuffer()}
+                    gameController.setTvScene(.varReplay)
+                    gameController.setHostScene(.varReplay)
                 }) {
                     Text("CHECK VAR")
                         .frame(maxWidth: .infinity)

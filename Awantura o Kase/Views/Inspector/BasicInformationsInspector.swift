@@ -16,6 +16,8 @@ struct BasicInformationsInspector: View {
         Text(String("Blue: \(controller.getBalance(ofTeam: .blue).formatted())"))
         Text(String("Green: \(controller.getBalance(ofTeam: .green).formatted())"))
         Text(String("Yellow: \(controller.getBalance(ofTeam: .yellow).formatted())"))
+        Text(String("Pool: \(controller.getPoolOfMoney().formatted())"))
+        Text(String("Host Pool: \(controller.getHostPoolOfMoney().formatted())"))
         
         Divider()
     }

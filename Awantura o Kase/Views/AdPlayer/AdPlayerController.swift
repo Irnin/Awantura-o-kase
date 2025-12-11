@@ -18,7 +18,6 @@ class AdPlayerController {
 
     init() {
         loadVideos()
-        setupPlayerObserver()
     }
     
     // MARK: Load Files
@@ -38,9 +37,18 @@ class AdPlayerController {
     // MARK: Player
     public func play(index: Int) {
         guard videos.indices.contains(index) else { return }
-        
+
         currentIndex = index
+
         let item = AVPlayerItem(url: videos[index])
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(playerItemDidFinish(_:)),
+            name: .AVPlayerItemDidPlayToEndTime,
+            object: item
+        )
+        
         player.replaceCurrentItem(with: item)
         player.play()
     }
@@ -54,14 +62,8 @@ class AdPlayerController {
         }
     }
     
-    private func setupPlayerObserver() {
-        NotificationCenter.default.addObserver(
-            forName: .AVPlayerItemDidPlayToEndTime,
-            object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            self?.playNext()
-        }
+    @objc private func playerItemDidFinish(_ notification: Notification) {
+        playNext()
     }
 }
 

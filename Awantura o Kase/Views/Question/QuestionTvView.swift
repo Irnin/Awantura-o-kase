@@ -8,6 +8,9 @@ struct QuestionTvView: View {
         if(controller.showSellHint) {
             SellHintSubView(controller: controller)
         }
+        else if(controller.showAttachment) {
+            ShowAttachment(controller: controller)
+        }
         else {
             QuestionSubView(controller: controller)
         }

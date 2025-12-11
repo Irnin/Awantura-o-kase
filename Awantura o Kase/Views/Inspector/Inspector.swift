@@ -8,6 +8,7 @@ struct Inspector: View {
             BasicInformationsInspector()
             VARInspector()
             TVInspector()
+            QuickLink()
             Spacer()
         }
         .padding(.horizontal, 10)

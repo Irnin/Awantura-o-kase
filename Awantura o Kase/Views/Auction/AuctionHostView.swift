@@ -129,10 +129,12 @@ struct AuctionHostView: View {
             }
             
             HStack {
-                Button("Start Auction", systemImage: "play.fill") {
-                    controller.startAuction()
+                if(!controller.auctionStarted) {
+                    Button("Start Auction", systemImage: "play.fill") {
+                        controller.startAuction()
+                    }
                 }
-                
+
                 Button("imposition of penalty") {
                     showPenaltyPopover = true
                 }
@@ -159,6 +161,9 @@ struct AuctionHostView: View {
                     .frame(width: 240)
                 }
                 
+                Button("Vabank") {
+                    controller.vabank()
+                }
                 
                 Button("Next stage", systemImage: "arrow.right.square.fill") {
                     gameController.jumpToQuestion()

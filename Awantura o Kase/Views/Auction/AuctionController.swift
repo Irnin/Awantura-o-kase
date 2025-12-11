@@ -16,6 +16,8 @@ class AuctionController {
     private(set) var auctionWinner: TeamColor?
     private(set) var currentBid: Int = 0
     
+    public var auctionStarted = false
+    
     var temporaryInput: [TeamColor: Int] = [.blue: 0, .green: 0, .yellow: 0]
     var bidAmount: [TeamColor: Int] = [.blue: 0, .green: 0, .yellow: 0]
     
@@ -37,6 +39,11 @@ class AuctionController {
         bidAmount[.blue] = 0
         bidAmount[.green] = 0
         bidAmount[.yellow] = 0
+        
+        selectedTeam = nil
+        auctionWinner = nil
+        
+        auctionStarted = false
     }
     
     /// Method is used to point
@@ -47,6 +54,12 @@ class AuctionController {
     }
     
     public func startAuction() {
+        if(auctionStarted) {
+            return
+        }
+        
+        auctionStarted = true
+        
         let amount = 500
         
         self.startAuctionForTeam(.blue, amount: amount)
@@ -64,6 +77,16 @@ class AuctionController {
         bidAmount[team]! = amount
         gameController.deduct(fromTeam: team, amount: amount)
         gameController.increasePool(amount: amount)
+    }
+    
+    func vabank() {
+        let team = selectedTeam!
+        
+        let bid = bidAmount[team]!
+        let balance = controller.getBalance(ofTeam: team)
+        let amount = balance + bid
+        
+        outbid(team: team, amount: Int(amount/100))
     }
     
     func outbid(team: TeamColor, amount: Int) {

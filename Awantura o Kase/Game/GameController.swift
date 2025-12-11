@@ -65,6 +65,11 @@ extension GameController {
         team.balance -= amount
     }
     
+    public func vabank(team: TeamColor) {
+        let team = game.getTeam(withColor: team)
+        team.balance = 0
+    }
+    
     public func getBalance(ofTeam team: TeamColor) -> Int {
         let team = game.getTeam(withColor: team)
         return team.balance
@@ -121,7 +126,9 @@ extension GameController {
 extension GameController {
     public func getCategories() -> Set<String> {
         
-        return Set(game.questions.map { $0.category })
+        return Set(game.questions
+                    .filter{$0.asked == false}
+                    .map { $0.category })
     }
     
     public func getCurrentCategory() -> String {
@@ -189,7 +196,15 @@ extension GameController {
     }
     
     public func jumpToQuestion() {
+        
+        if(game.currentCategory == "") {
+            return
+        }
+        
         game.gameState = .question
+        
+        let questionController = QuestionController.shared
+        questionController.findQuestion()
         
         setTvScene(.question)
         setHostScene(.question)
@@ -208,6 +223,34 @@ extension GameController {
         questionController.reset()
         
         self.jumpToDrawCategory()
+    }
+    
+    public func backToCurrentPhase() {
+        switch game.gameState {
+        case .drawCategory:
+            setTvScene(.drawCategory)
+            setHostScene(.drawCategory)
+            
+        case .auction:
+            setTvScene(.auction)
+            setHostScene(.auction)
+            
+        case .question:
+            setTvScene(.question)
+            setHostScene(.question)
+            
+        case .preGame:
+            setTvScene(.preGame)
+            setHostScene(.preGame)
+        }
+    }
+    
+    public func playAds() {
+        setTvScene(.ads)
+        setHostScene(.ads)
+        
+        let adController = AdPlayerController.shared
+        adController.play(index: 0)
     }
 }
 

@@ -18,11 +18,14 @@ final class Question: Identifiable, Codable {
     }
     
     public func attachmentType() -> String {
-        if(attachmentPath.hasSuffix(".png")) {
+        if(attachmentPath.hasSuffix(".jpg")) {
             return "image"
         }
         else if(attachmentPath.hasSuffix(".mp3")) {
             return "audio"
+        }
+        else if(attachmentPath.hasSuffix(".mp4")) {
+            return "video"
         }
         
         return "none"

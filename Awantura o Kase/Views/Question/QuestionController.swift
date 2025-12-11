@@ -14,14 +14,20 @@ class QuestionController {
     
     // Variables
     private var currentQuestion: Question?
-    private(set) var showHint: Bool = false
     private(set) var hints: [String] = []
     
+    private var attachmentPath = "file:///Users/lukaszmichalak/myDocuments/Projects/Awantura o kase/Awantura o kase II Edycja/Assets/attachments/"
+    
+    public var showHint: Bool = false
     public var showSellHint = false
+    public var showAttachment = false
     
     var timer = Timer()
     private var timeLeft: Int = 60
     private var timerOn: Bool = false
+    
+    private(set) var attachmentVideoPlayer: AVPlayer = AVPlayer()
+    private var attachmentAudioPlayer: AVAudioPlayer?
     
     // Variables to winning animation
     public var startMoneyAnimation: Int = 0
@@ -45,6 +51,7 @@ class QuestionController {
         timerOn = false
         showHint = false
         showSellHint = false
+        showAttachment = false
     }
     
     public func getQuestionNumber() -> String {
@@ -85,6 +92,28 @@ class QuestionController {
         currentQuestion = controller.getQuestionForCurrentCategory()
         
         hints = currentQuestion!.getHits()
+        
+        // Attachment
+        let attachmentType = getAttachmentType()
+        
+        if(attachmentType != "none") {
+            showAttachment = true
+        }
+        
+        if (attachmentType == "video") {
+            let item = AVPlayerItem(url: getAttachmentURL())
+            self.attachmentVideoPlayer = AVPlayer(playerItem: item)
+            self.attachmentVideoPlayer.actionAtItemEnd = .pause
+        }
+        else if (attachmentType == "audio") {
+            let url = getAttachmentURL()
+            
+            do {
+                attachmentAudioPlayer = try AVAudioPlayer(contentsOf: url)
+            } catch {
+                print("Can not load audio: \(error.localizedDescription)")
+            }
+        }
     }
     
     public func getQuestionBody() -> String {
@@ -105,6 +134,10 @@ class QuestionController {
     
     public func getHint() -> [String] {
         return hints
+    }
+    
+    public func playAudioAttachment() {
+        attachmentAudioPlayer?.play()
     }
     
     public func sellHintFor(_ amount: Int) {
@@ -134,6 +167,14 @@ class QuestionController {
         }
         
         return currentQuestion.attachmentType()
+    }
+    
+    public func getAttachmentURL() -> URL {
+        guard let question = currentQuestion else {
+            return URL.homeDirectory
+        }
+        
+        return URL(string: attachmentPath + question.attachmentPath)!
     }
     
     public func containAttachment() -> Bool {
@@ -188,6 +229,11 @@ extension QuestionController {
     }
     
     public func startTimer() {
+        
+        if(timerOn)  {
+            return
+        }
+        
         timerOn = true
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
